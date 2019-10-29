@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "418041820788",
+    "firebase_url": "https://foodpantry-8b96c.firebaseio.com",
+    "project_id": "foodpantry-8b96c",
+    "storage_bucket": "foodpantry-8b96c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:418041820788:android:504d86d505e016a06c0321",
+        "android_client_info": {
+          "package_name": "com.example.nbathras.foodpantry"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "418041820788-l6ujrcciv499r2ek5rnbfbavl1918fve.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.nbathras.foodpantry",
+            "certificate_hash": "1e82d97f86e0a4ae74ee09b53bf0d64fd0e1f703"
+          }
+        },
+        {
+          "client_id": "418041820788-qe6m3vcl0sjrum0f929pujpv7otk6u21.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCOPhPW8-Fhmo-F48f275LF9EILRTcVNeA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "418041820788-qe6m3vcl0sjrum0f929pujpv7otk6u21.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
