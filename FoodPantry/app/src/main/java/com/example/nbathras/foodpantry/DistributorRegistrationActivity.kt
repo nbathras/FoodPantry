@@ -11,10 +11,9 @@ import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 
-class ProviderRegistrationActivity : AppCompatActivity() {
+class DistributorRegistrationActivity : AppCompatActivity() {
 
     private lateinit var mEmailEditText: EditText
     private lateinit var mPasswordEditText: EditText
@@ -28,7 +27,7 @@ class ProviderRegistrationActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_provider_registration)
+        setContentView(R.layout.activity_distributor_registration)
 
         initializeViews()
 
@@ -71,17 +70,17 @@ class ProviderRegistrationActivity : AppCompatActivity() {
                     ).show()
                     mProgressBar.visibility = View.GONE
 
-                    // Creates provider entry
+                    // Creates distributor entry
                     val userID             = mAuth.currentUser!!.uid
                     val mDatabase          = FirebaseDatabase.getInstance()
-                    val mDatabaseReference = mDatabase.getReference("providers").child(userID)
+                    val mDatabaseReference = mDatabase.getReference("distributors").child(userID)
 
                     val id = (mDatabaseReference.push()).key.toString()
-                    val provider = Provider(userID, id, name, address, about)
-                    mDatabaseReference.child(id).setValue(provider)
+                    val distributor = Distributor(userID, id, name, address, about)
+                    mDatabaseReference.child(id).setValue(distributor)
 
                     // Opens login activity
-                    val intent = Intent(this@ProviderRegistrationActivity, LoginActivity::class.java)
+                    val intent = Intent(this@DistributorRegistrationActivity, LoginActivity::class.java)
                     startActivity(intent)
                     // Closes activity
                     finish()
@@ -98,17 +97,17 @@ class ProviderRegistrationActivity : AppCompatActivity() {
     }
 
     private fun initializeViews() {
-        mEmailEditText      = findViewById(R.id.activityProviderRegistration_emailEditText)
-        mPasswordEditText   = findViewById(R.id.activityProviderRegistration_passwordEditText)
-        mNameEditText       = findViewById(R.id.activityProviderRegistration_nameEditText)
-        mAddressEditText    = findViewById(R.id.activityProviderRegistration_addressEditText)
-        mAboutEditText      = findViewById(R.id.activityProviderRegistration_aboutEditText)
-        mRegistrationButton = findViewById(R.id.activityProviderRegistration_registerButton)
-        mProgressBar        = findViewById(R.id.activityProviderRegistration_progressBar)
+        mEmailEditText      = findViewById(R.id.activityDistributorRegistration_emailEditText)
+        mPasswordEditText   = findViewById(R.id.activityDistributorRegistration_passwordEditText)
+        mNameEditText       = findViewById(R.id.activityDistributorRegistration_nameEditText)
+        mAddressEditText    = findViewById(R.id.activityDistributorRegistration_addressEditText)
+        mAboutEditText      = findViewById(R.id.activityDistributorRegistration_aboutEditText)
+        mRegistrationButton = findViewById(R.id.activityDistributorRegistration_registerButton)
+        mProgressBar        = findViewById(R.id.activityDistributorRegistration_progressBar)
     }
 
     companion object {
         private const val TAG          = "FoodPantry"
-        private const val ACTIVITY_TAG = "ProviderRegistrationActivity"
+        private const val ACTIVITY_TAG = "DistributorRegistrationActivity"
     }
 }

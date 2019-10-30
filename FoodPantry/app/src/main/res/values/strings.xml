@@ -1,15 +1,15 @@
 <resources>
     <string name="app_name">FoodPantry</string>
-    <string name="username_string">UserName</string>
+    <string name="email_string">Email</string>
     <string name="password_string">Password</string>
-    <string name="enter_username_hint">Enter username</string>
+    <string name="enter_email_hint">Enter email</string>
     <string name="enter_password_hint">Enter Password</string>
     <string name="login_string">Login</string>
 
 
     <!-- Registration Strings -->
-    <string name="provider_registration_description">Register new Provider account</string>
-    <string name="register_provider_button">Register Provider</string>
+    <string name="distributor_registration_description">Register new Distributor account</string>
+    <string name="register_distributor_button">Register Distributor</string>
     <string name="donor_registration_description">Register new Donor account</string>
     <string name="register_donor_button">Register Donor</string>
     <string name="email_edit_text_hint">Email</string>

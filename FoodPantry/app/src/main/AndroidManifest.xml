@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ProviderRegistrationActivity"></activity>
+        <activity android:name=".DistributorSplashActivity"></activity>
+        <activity android:name=".DonorSplashActivity" />
+        <activity android:name=".DistributorRegistrationActivity" />
         <activity android:name=".DonorRegistrationActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".MainActivity">

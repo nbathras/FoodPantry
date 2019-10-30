@@ -12,14 +12,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingBottom="4dp"
-        android:text="@string/username_string"
+        android:text="@string/email_string"
         android:textAppearance="@android:style/TextAppearance.Material.Medium" />
 
     <EditText
         android:id="@+id/activityLogin_emailEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/enter_username_hint"
+        android:hint="@string/enter_email_hint"
         android:inputType="text"
         android:paddingBottom="12dp"
         android:textAppearance="@android:style/TextAppearance.Material.Medium"
