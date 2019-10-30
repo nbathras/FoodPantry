@@ -1,15 +1,22 @@
 package com.example.nbathras.foodpantry
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
 
 class LoginActivity : AppCompatActivity() {
 
@@ -18,7 +25,7 @@ class LoginActivity : AppCompatActivity() {
     private var mLoginButton : Button? = null
     private var mProgressBar : ProgressBar? = null
 
-    private var mAuth : FirebaseAuth? = null
+    private lateinit var sharedPreferences : SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,7 +55,8 @@ class LoginActivity : AppCompatActivity() {
             return
         }
 
-        mAuth!!.createUserWithEmailAndPassword(email, password)
+        val mAuth = FirebaseAuth.getInstance()
+        mAuth!!.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     Toast.makeText(
@@ -58,12 +66,72 @@ class LoginActivity : AppCompatActivity() {
                     ).show()
                     mProgressBar!!.visibility = View.GONE
 
-                    val id = mAuth?.currentUser?.uid
-                    /*
-                    val intent = Intent(this@LoginActivity, DashboardActivity::class.java)
-                    intent.putExtra(UserID, id)
-                    startActivity(intent)
-                    */
+                    val userID = mAuth.currentUser!!.uid
+                    val userEMAIL = mAuth.currentUser!!.email
+
+                    val mDatabase                     = FirebaseDatabase.getInstance()
+                    val mDonorDatabaseReference       = mDatabase.getReference("donors").child(userID)
+                    val mDistributorDatabaseReference = mDatabase.getReference("distributors").child(userID)
+
+                    mDonorDatabaseReference.addListenerForSingleValueEvent(object : ValueEventListener {
+                        override fun onDataChange(dataSnapshot: DataSnapshot) {
+                            if (dataSnapshot.childrenCount > 0 ) {
+                                Log.i(TAG, ACTIVITY_TAG.plus(": signInWithEmailAndPassword | donors"))
+
+                                for (postSnapshot in dataSnapshot.children) {
+                                    sharedPreferences = getSharedPreferences(MY_PREFERENCE, Context.MODE_PRIVATE)
+                                    val donor = postSnapshot.getValue<Donor>(Donor::class.java)
+
+                                    val editor = sharedPreferences.edit()
+                                    editor.putString(USER_LOGIN_TYPE, "donors")
+                                    editor.putString(USER_ID, userID)
+                                    editor.putString(USER_EMAIL, userEMAIL)
+                                    editor.putString(USER_NAME, donor?.donorName)
+                                    editor.putString(USER_DONOR_TYPE, donor?.donorType)
+                                    editor.apply()
+                                    editor.commit()
+                                }
+
+                                val intent = Intent(this@LoginActivity, DonorSplashActivity::class.java)
+                                startActivity(intent)
+
+                                finish()
+                            }
+                        }
+
+                        override fun onCancelled(databaseError: DatabaseError) {}
+                    })
+
+                    mDistributorDatabaseReference.addListenerForSingleValueEvent(object : ValueEventListener {
+                        override fun onDataChange(dataSnapshot: DataSnapshot) {
+                            if (dataSnapshot.childrenCount > 0 ) {
+                                Log.i(TAG, ACTIVITY_TAG.plus(": signInWithEmailAndPassword | distributors"))
+
+                                for (postSnapshot in dataSnapshot.children) {
+                                    sharedPreferences = getSharedPreferences(MY_PREFERENCE, Context.MODE_PRIVATE)
+                                    val distributor = postSnapshot.getValue<Distributor>(Distributor::class.java)
+
+                                    val editor = sharedPreferences.edit()
+                                    editor.putString(USER_LOGIN_TYPE, "distributor")
+                                    editor.putString(USER_ID, userID)
+                                    editor.putString(USER_EMAIL, userEMAIL)
+                                    editor.putString(USER_NAME, distributor?.distributorName)
+                                    editor.putString(USER_DISTRIBUTOR_ABOUT, distributor?.distributorAbout)
+                                    editor.putString(USER_DISTRIBUTOR_ADDRESS, distributor?.distributorAddress)
+                                    editor.apply()
+                                    editor.commit()
+                                }
+
+                                val intent = Intent(this@LoginActivity, DistributorSplashActivity::class.java)
+                                startActivity(intent)
+
+                                finish()
+                            }
+                        }
+
+                        override fun onCancelled(databaseError: DatabaseError) {}
+                    })
+
                 } else {
                     // ToDo: Probably should have more explicit failure messages
                     Toast.makeText(
@@ -84,6 +152,18 @@ class LoginActivity : AppCompatActivity() {
     }
 
     companion object {
-        val UserID = "com.example.tesla.myhomelibrary.UID"
+        private const val TAG          = "FoodPantry"
+        private const val ACTIVITY_TAG = "LoginActivity"
+
+        const val MY_PREFERENCE   = "myPreference"
+        const val USER_LOGIN_TYPE = "userLoginType"
+        const val USER_ID         = "userID"
+        const val USER_EMAIL      = "userEmail"
+        const val USER_NAME       = "userName"
+
+        const val USER_DONOR_TYPE = "userDonorType"
+
+        const val USER_DISTRIBUTOR_ADDRESS = "userDistributorAddress"
+        const val USER_DISTRIBUTOR_ABOUT   = "userDistributorAbout"
     }
 }
