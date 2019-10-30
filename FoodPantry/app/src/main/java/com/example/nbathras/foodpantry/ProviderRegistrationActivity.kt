@@ -16,39 +16,35 @@ import com.google.firebase.database.FirebaseDatabase
 
 class ProviderRegistrationActivity : AppCompatActivity() {
 
-    private var mEmailEditText: EditText?    = null
-    private var mPasswordEditText: EditText? = null
-    private var mTypeEditText: EditText?     = null
-    private var mRegistrationButton: Button? = null
-    private var mProgressBar: ProgressBar?   = null
+    private lateinit var mEmailEditText: EditText
+    private lateinit var mPasswordEditText: EditText
+    private lateinit var mNameEditText: EditText
+    private lateinit var mAddressEditText: EditText
+    private lateinit var mAboutEditText: EditText
+    private lateinit var mRegistrationButton: Button
+    private lateinit var mProgressBar: ProgressBar
 
-    private var mDatabaseReference: DatabaseReference? = null
-    private var mDatabase: FirebaseDatabase? = null
-
-    private var mAuth: FirebaseAuth? = null
+    private lateinit var mAuth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_provider_registration)
 
-        mDatabase          = FirebaseDatabase.getInstance()
-        mDatabaseReference = mDatabase!!.getReference("providers")
-//         mDatabaseReference = mDatabaseReference!!.child("providers")
-        mAuth              = FirebaseAuth.getInstance()
-
         initializeViews()
 
-        mRegistrationButton!!.setOnClickListener {
+        mRegistrationButton.setOnClickListener {
             registerNewUser()
         }
     }
 
     private fun registerNewUser() {
-        mProgressBar!!.visibility = View.VISIBLE
+        mProgressBar.visibility = View.VISIBLE
 
-        val email: String    = mEmailEditText!!.text.toString()
-        val password: String = mPasswordEditText!!.text.toString()
-        val type: String     = mTypeEditText!!.text.toString().trim { it <= ' ' }
+        val email: String    = mEmailEditText.text.toString()
+        val password: String = mPasswordEditText.text.toString()
+        val name: String     = mNameEditText.text.toString().trim { it <= ' ' }
+        val address: String  = mAddressEditText.text.toString().trim { it <= ' ' }
+        val about: String    = mAboutEditText.text.toString().trim { it <= ' ' }
 
         // ToDo: Probably should check if the email entered was valid as well
         if (TextUtils.isEmpty(email)) {
@@ -61,21 +57,41 @@ class ProviderRegistrationActivity : AppCompatActivity() {
             return
         }
 
-        mAuth!!.createUserWithEmailAndPassword(email, password)
+        mAuth = FirebaseAuth.getInstance()
+        mAuth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    Toast.makeText(applicationContext, "Registration successful!", Toast.LENGTH_LONG).show()
-                    mProgressBar!!.visibility = View.GONE
+                    Log.i(TAG, ACTIVITY_TAG.plus(": createUserWithEmailAndPassword"))
 
-                    val id = (mDatabaseReference!!.push()).key.toString()
-                    val provider = Provider(id, type)
-                    mDatabaseReference!!.child(id).setValue(provider)
+                    // Displays successful registration toast
+                    Toast.makeText(
+                        applicationContext,
+                        "Registration successful!",
+                        Toast.LENGTH_LONG
+                    ).show()
+                    mProgressBar.visibility = View.GONE
 
+                    // Creates provider entry
+                    val userID             = mAuth.currentUser!!.uid
+                    val mDatabase          = FirebaseDatabase.getInstance()
+                    val mDatabaseReference = mDatabase.getReference("providers").child(userID)
+
+                    val id = (mDatabaseReference.push()).key.toString()
+                    val provider = Provider(userID, id, name, address, about)
+                    mDatabaseReference.child(id).setValue(provider)
+
+                    // Opens login activity
                     val intent = Intent(this@ProviderRegistrationActivity, LoginActivity::class.java)
                     startActivity(intent)
+                    // Closes activity
+                    finish()
                 } else {
                     // ToDo: Probably should have more explicit failure messages
-                    Toast.makeText(applicationContext, "Registration failed!  Please try again later", Toast.LENGTH_LONG).show()
+                    Toast.makeText(
+                        applicationContext,
+                        "Registration failed!  Please try again later",
+                        Toast.LENGTH_LONG
+                    ).show()
                     mProgressBar!!.visibility = View.GONE
                 }
             }
@@ -84,8 +100,15 @@ class ProviderRegistrationActivity : AppCompatActivity() {
     private fun initializeViews() {
         mEmailEditText      = findViewById(R.id.activityProviderRegistration_emailEditText)
         mPasswordEditText   = findViewById(R.id.activityProviderRegistration_passwordEditText)
-        mTypeEditText       = findViewById(R.id.activityProviderRegistration_typeEditText)
+        mNameEditText       = findViewById(R.id.activityProviderRegistration_nameEditText)
+        mAddressEditText    = findViewById(R.id.activityProviderRegistration_addressEditText)
+        mAboutEditText      = findViewById(R.id.activityProviderRegistration_aboutEditText)
         mRegistrationButton = findViewById(R.id.activityProviderRegistration_registerButton)
         mProgressBar        = findViewById(R.id.activityProviderRegistration_progressBar)
+    }
+
+    companion object {
+        private const val TAG          = "FoodPantry"
+        private const val ACTIVITY_TAG = "ProviderRegistrationActivity"
     }
 }

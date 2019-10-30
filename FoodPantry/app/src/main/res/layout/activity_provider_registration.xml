@@ -26,10 +26,22 @@
         android:inputType="textPassword" />
 
     <EditText
-        android:id="@+id/activityProviderRegistration_typeEditText"
+        android:id="@+id/activityProviderRegistration_nameEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/type_edit_text_hint"/>
+        android:hint="@string/name_edit_text_hint"/>
+
+    <EditText
+        android:id="@+id/activityProviderRegistration_addressEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/address_edit_text_hint"/>
+
+    <EditText
+        android:id="@+id/activityProviderRegistration_aboutEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/about_edit_text_hint"/>
 
     <Button
         android:id="@+id/activityProviderRegistration_registerButton"

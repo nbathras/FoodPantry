@@ -15,4 +15,7 @@
     <string name="email_edit_text_hint">Email</string>
     <string name="password_edit_text_hint">Password</string>
     <string name="type_edit_text_hint">Organization Type</string>
+    <string name="name_edit_text_hint">Name</string>
+    <string name="address_edit_text_hint">Address</string>
+    <string name="about_edit_text_hint">About</string>
 </resources>

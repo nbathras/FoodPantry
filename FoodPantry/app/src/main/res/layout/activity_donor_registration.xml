@@ -25,6 +25,18 @@
         android:hint="@string/password_edit_text_hint"
         android:inputType="textPassword" />
 
+    <EditText
+        android:id="@+id/activityDonorRegistration_nameEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/name_edit_text_hint"/>
+
+    <EditText
+        android:id="@+id/activityDonorRegistration_typeEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/type_edit_text_hint"/>
+
     <Button
         android:id="@+id/activityDonorRegistration_registerButton"
         android:layout_width="match_parent"

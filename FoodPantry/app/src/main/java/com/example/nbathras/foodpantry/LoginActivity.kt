@@ -51,7 +51,11 @@ class LoginActivity : AppCompatActivity() {
         mAuth!!.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    Toast.makeText(applicationContext, "Login successful!", Toast.LENGTH_LONG).show()
+                    Toast.makeText(
+                        applicationContext,
+                        "Login successful!",
+                        Toast.LENGTH_LONG
+                    ).show()
                     mProgressBar!!.visibility = View.GONE
 
                     val id = mAuth?.currentUser?.uid
@@ -62,7 +66,11 @@ class LoginActivity : AppCompatActivity() {
                     */
                 } else {
                     // ToDo: Probably should have more explicit failure messages
-                    Toast.makeText(applicationContext, "Registration failed!  Please try again later", Toast.LENGTH_LONG).show()
+                    Toast.makeText(
+                        applicationContext,
+                        "Registration failed!  Please try again later",
+                        Toast.LENGTH_LONG
+                    ).show()
                     mProgressBar!!.visibility = View.GONE
                 }
             }
