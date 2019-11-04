@@ -18,4 +18,10 @@
     <string name="name_edit_text_hint">Name</string>
     <string name="address_edit_text_hint">Address</string>
     <string name="about_edit_text_hint">About</string>
+
+    <!--Layout Strings -->
+    <string name="distributor_name">Distributor Name</string>
+    <string name="distributor_about">Distributor About</string>
+
+
 </resources>
