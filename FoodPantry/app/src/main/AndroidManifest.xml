@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".DistributorList"></activity>
+        <activity android:name=".DistributorRequestList"></activity>
+        <activity android:name=".DistributorPageRequestActivity" />
+        <activity android:name=".DistributorList" />
         <activity android:name=".DistributorSplashActivity" />
         <activity android:name=".DonorSplashActivity" />
         <activity android:name=".DistributorRegistrationActivity" />
