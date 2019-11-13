@@ -1,12 +1,15 @@
 package com.example.nbathras.foodpantry
 
 import android.content.Context
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
 import android.content.SharedPreferences
+import android.util.Log
 import android.widget.ListView
 import android.widget.ArrayAdapter
 import android.view.View
+import android.widget.AdapterView
+import androidx.appcompat.app.AppCompatActivity
 
 import com.google.firebase.database.*
 import com.google.firebase.database.DataSnapshot
@@ -36,6 +39,21 @@ class DonorSplashActivity : AppCompatActivity() {
         distributors = ArrayList()
         //List view defined in layout file
         listViewDistributor = findViewById<View>(R.id.donor_splash_list) as ListView
+
+        //When the user clicks on a specific distributor list item, show their biography/request page
+        listViewDistributor.onItemClickListener =
+            AdapterView.OnItemClickListener { adapterView, view, i, l ->
+                val distributor = distributors[i]
+                val intent = Intent(applicationContext, DistributorPageRequestActivity::class.java)
+
+                intent.putExtra(DISTRIBUTOR_NAME, distributor.distributorName)
+                intent.putExtra(DISTRIBUTOR_ADDRESS, distributor.distributorAddress)
+                intent.putExtra(DISTRIBUTOR_ABOUT, distributor.distributorAbout)
+                intent.putExtra(USER_ID, userUID)
+                intent.putExtra(DISTRIBUTOR_ID,distributor.distributorId)
+                
+                startActivity(intent)
+            }
     }
 
     override fun onStart() {
@@ -66,6 +84,13 @@ class DonorSplashActivity : AppCompatActivity() {
     companion object {
         const val MY_PREFERENCE   = "myPreference"
         const val USER_ID         = "userID"
+
+        const val DISTRIBUTOR_NAME  = "distributorName"
+        const val DISTRIBUTOR_ABOUT = "distributorAbout"
+        const val DISTRIBUTOR_ADDRESS = "distributorAddress"
+        const val DISTRIBUTOR_ID = "distributorID"
+
+        private val TAG = "DonorSplashActivity"
     }
 
 }

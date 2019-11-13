@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DistributorPageRequestActivity">
+
+
+    <ListView
+        android:id="@+id/distributor_request_list"
+        android:layout_width="match_parent"
+        android:layout_height="456dp"
+        android:layout_below="@id/distributor_picture"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="75dp"></ListView>
+
+    <ImageView
+        android:id="@+id/distributor_picture"
+        android:layout_width="138dp"
+        android:layout_height="142dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="50dp"
+        android:background="#FF1744"></ImageView>
+
+    <TextView
+        android:id="@+id/distributorName"
+        android:layout_width="194dp"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@id/distributor_picture"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="35dp"
+        android:text="@string/distributor_name"></TextView>
+
+    <TextView
+        android:id="@+id/distributorAbout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/distributorName"
+        android:layout_alignRight="@id/distributor_picture"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="35dp"
+        android:width="194dp"
+        android:height="100dp"
+        android:text="@string/distributor_about"
+        tools:layout_marginTop="80dp"></TextView>
+
+</RelativeLayout>
