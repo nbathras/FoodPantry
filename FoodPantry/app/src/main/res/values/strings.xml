@@ -14,10 +14,17 @@
     <string name="register_donor_button">Register Donor</string>
     <string name="email_edit_text_hint">Email</string>
     <string name="password_edit_text_hint">Password</string>
-    <string name="type_edit_text_hint">Organization Type</string>
     <string name="name_edit_text_hint">Name</string>
     <string name="address_edit_text_hint">Address</string>
     <string name="about_edit_text_hint">About</string>
+    <string-array name="donor_type_array">
+        <item>Restaurant</item>
+        <item>Grocery Store</item>
+        <item>Public Garden</item>
+        <item>For Profit Garden</item>
+        <item>Individual</item>
+        <item>Other</item>
+    </string-array>
 
     <!--Layout Strings -->
     <string name="distributor_name">Distributor Name</string>

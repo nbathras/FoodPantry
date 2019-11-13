@@ -6,10 +6,7 @@ import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ProgressBar
-import android.widget.Toast
+import android.widget.*
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 
@@ -17,7 +14,7 @@ class DonorRegistrationActivity : AppCompatActivity() {
 
     private lateinit var mEmailEditText: EditText
     private lateinit var mPasswordEditText: EditText
-    private lateinit var mTypeEditText: EditText
+    private lateinit var mTypeSpinner: Spinner
     private lateinit var mNameEditText: EditText
     private lateinit var mRegistrationButton: Button
     private lateinit var mProgressBar: ProgressBar
@@ -38,7 +35,7 @@ class DonorRegistrationActivity : AppCompatActivity() {
 
         val email: String    = mEmailEditText.text.toString()
         val password: String = mPasswordEditText.text.toString()
-        val type: String     = mTypeEditText.text.toString().trim { it <= ' ' }
+        val type: String     = mTypeSpinner.toString().trim { it <= ' ' }
         val name: String     = mNameEditText.text.toString().trim { it <= ' ' }
 
         // ToDo: Probably should check if the email entered was valid as well
@@ -104,10 +101,19 @@ class DonorRegistrationActivity : AppCompatActivity() {
     private fun initializeViews() {
         mEmailEditText      = findViewById(R.id.activityDonorRegistration_emailEditText)
         mPasswordEditText   = findViewById(R.id.activityDonorRegistration_passwordEditText)
-        mTypeEditText       = findViewById(R.id.activityDonorRegistration_typeEditText)
+        mTypeSpinner        = findViewById(R.id.activityDonorRegistration_typeSpinner)
         mNameEditText       = findViewById(R.id.activityDonorRegistration_nameEditText)
         mRegistrationButton = findViewById(R.id.activityDonorRegistration_registerButton)
         mProgressBar        = findViewById(R.id.activityDonorRegistration_progressBar)
+
+        ArrayAdapter.createFromResource(
+            this,
+            R.array.donor_type_array,
+            android.R.layout.simple_spinner_item
+        ).also {adapter ->
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            mTypeSpinner.adapter = adapter
+        }
     }
 
     companion object {
