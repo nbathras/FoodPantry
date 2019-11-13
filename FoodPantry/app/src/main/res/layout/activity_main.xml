@@ -25,7 +25,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/register_distributor_button" />
-
     </LinearLayout>
 
     <LinearLayout
@@ -39,7 +38,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Login" />
-
     </LinearLayout>
 
 </RelativeLayout>

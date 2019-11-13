@@ -9,13 +9,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".DistributorRequestList"></activity>
+        <activity android:name=".DistributorRequestList"/>
         <activity android:name=".DistributorPageRequestActivity" />
         <activity android:name=".DistributorList" />
         <activity android:name=".DistributorSplashActivity" />
         <activity android:name=".DonorSplashActivity" />
-        <activity android:name=".DistributorRegistrationActivity" />
-        <activity android:name=".DonorRegistrationActivity" />
+        <activity
+            android:name=".DistributorRegistrationActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".DonorRegistrationActivity"
+            android:windowSoftInputMode="adjustPan"/>
         <activity android:name=".LoginActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
