@@ -10,6 +10,10 @@ import android.widget.ArrayAdapter
 import android.view.View
 import android.widget.AdapterView
 import androidx.appcompat.app.AppCompatActivity
+import com.example.nbathras.foodpantry.DistributorPageRequestActivity.Companion.DISTRIBUTOR_ABOUT
+import com.example.nbathras.foodpantry.DistributorPageRequestActivity.Companion.DISTRIBUTOR_ID
+import com.example.nbathras.foodpantry.DistributorPageRequestActivity.Companion.DISTRIBUTOR_NAME
+import com.example.nbathras.foodpantry.LoginActivity.Companion.MY_PREFERENCE
 
 import com.google.firebase.database.*
 import com.google.firebase.database.DataSnapshot
@@ -33,7 +37,7 @@ class DonorSplashActivity : AppCompatActivity() {
         //Obtaining specific userID through sharedPreferences
         userUID = sharedPreferences.getString(USER_ID, "Null").toString()
         //Accessing distributors list from firebase database
-        databaseDistributors = FirebaseDatabase.getInstance().getReference("distributors").child(userUID)
+        databaseDistributors = FirebaseDatabase.getInstance().getReference("distributors")
         //distributors arraylist to be populated with values from databaseDistributors
         distributors = ArrayList()
         //List view defined in layout file
@@ -64,9 +68,11 @@ class DonorSplashActivity : AppCompatActivity() {
 
                 //populating the distributors array from the database
                 for (postSnapshot in dataSnapshot.children) {
-                    val distributor = postSnapshot.getValue<Distributor>(Distributor::class.java)
-                    //add distributor to the list
-                    distributors.add(distributor!!)
+                    for (postSnapshot2 in postSnapshot.children) {
+                        val distributor = postSnapshot2.getValue<Distributor>(Distributor::class.java)
+                        //add distributor to the list
+                        distributors.add(distributor!!)
+                    }
                 }
 
                 //Initializing listViewAdapter to customized DistributorList adapter
