@@ -5,54 +5,112 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:layout_margin="4dp"
     tools:context=".DistributorRegistrationActivity">
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/distributor_registration_description" />
 
-    <EditText
-        android:id="@+id/activityDistributorRegistration_emailEditText"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/email_edit_text_hint" />
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:layout_weight="1">
+        <!-- android:background="#FF0000"> -->
 
-    <EditText
-        android:id="@+id/activityDistributorRegistration_passwordEditText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/password_edit_text_hint"
-        android:inputType="textPassword" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="24dp"
+            android:textStyle="bold"
+            android:text="Login Information:"/>
 
-    <EditText
-        android:id="@+id/activityDistributorRegistration_nameEditText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/name_edit_text_hint"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginLeft="8dp">
 
-    <EditText
-        android:id="@+id/activityDistributorRegistration_addressEditText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/address_edit_text_hint"/>
+            <EditText
+                android:id="@+id/activityDistributorRegistration_emailEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/email_edit_text_hint" />
 
-    <EditText
-        android:id="@+id/activityDistributorRegistration_aboutEditText"
+            <EditText
+                android:id="@+id/activityDistributorRegistration_passwordEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/password_edit_text_hint"
+                android:inputType="textPassword" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/about_edit_text_hint"/>
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:layout_weight="3">
+        <!-- android:background="#00FF00" > -->
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="24dp"
+            android:textStyle="bold"
+            android:text="Profile Information:"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginLeft="8dp">
+
+            <EditText
+                android:id="@+id/activityDistributorRegistration_nameEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/name_edit_text_hint"/>
+
+            <EditText
+                android:id="@+id/activityDistributorRegistration_addressEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/address_edit_text_hint"/>
+
+            <EditText
+                android:id="@+id/activityDistributorRegistration_aboutEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="6"
+                android:minLines="6"
+                android:lines="6"
+                android:gravity="top|left"
+                android:inputType="textMultiLine"
+                android:scrollbars="vertical"
+                android:background="#d9d9d9"
+                android:hint="@string/about_edit_text_hint"/>
+
+            <ProgressBar
+                android:id="@+id/activityDistributorRegistration_progressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:visibility="gone"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
 
     <Button
         android:id="@+id/activityDistributorRegistration_registerButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Register" />
-
-    <ProgressBar
-        android:id="@+id/activityDistributorRegistration_progressBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone" />
+        android:text="Register"
+        android:layout_gravity="bottom"/>
 
 </LinearLayout>

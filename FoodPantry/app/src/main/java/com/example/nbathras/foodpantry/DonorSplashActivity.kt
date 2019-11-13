@@ -29,7 +29,6 @@ class DonorSplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_donor_splash)
 
-
         sharedPreferences = getSharedPreferences(MY_PREFERENCE, Context.MODE_PRIVATE)
         //Obtaining specific userID through sharedPreferences
         userUID = sharedPreferences.getString(USER_ID, "Null").toString()
