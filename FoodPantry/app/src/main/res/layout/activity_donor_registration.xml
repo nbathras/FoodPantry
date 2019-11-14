@@ -95,6 +95,12 @@
                         android:id="@+id/activityDonorRegistration_typeSpinner"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
+
+                    <EditText
+                        android:id="@+id/activityDonorRegistration_phoneEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Phone Number"/>
                 </LinearLayout>
 
             </LinearLayout>
