@@ -37,6 +37,8 @@ class DistributorPageRequestActivity : AppCompatActivity() {
         //Setting distributor about text field
         distributorAbout.text = intent.getStringExtra(DISTRIBUTOR_ABOUT)
 
+        distributorRequest = ArrayList()
+
         databaseDistributorRequest = FirebaseDatabase.getInstance().getReference("requests").
             child(intent.getStringExtra(DISTRIBUTOR_ID))
     }
