@@ -16,6 +16,7 @@ class DonorRegistrationActivity : AppCompatActivity() {
     private lateinit var mPasswordEditText: EditText
     private lateinit var mTypeSpinner: Spinner
     private lateinit var mNameEditText: EditText
+    private lateinit var mPhoneEditText: EditText
     private lateinit var mRegistrationButton: Button
     private lateinit var mProgressBar: ProgressBar
 
@@ -37,6 +38,7 @@ class DonorRegistrationActivity : AppCompatActivity() {
         val password: String = mPasswordEditText.text.toString()
         val type: String     = mTypeSpinner.toString().trim { it <= ' ' }
         val name: String     = mNameEditText.text.toString().trim { it <= ' ' }
+        val phone: String    = mPhoneEditText.text.toString().trim { it <= ' ' }
 
         // ToDo: Probably should check if the email entered was valid as well
         if (TextUtils.isEmpty(email)) {
@@ -78,7 +80,7 @@ class DonorRegistrationActivity : AppCompatActivity() {
                     val mDatabaseReference = mDatabase.getReference("donors").child(userID)
 
                     val id = (mDatabaseReference.push()).key.toString()
-                    val donor = Donor(userID, id, type, name)
+                    val donor = Donor(userID, id, type, name, phone)
                     mDatabaseReference.child(id).setValue(donor)
 
                     // Opens login activity
@@ -105,6 +107,7 @@ class DonorRegistrationActivity : AppCompatActivity() {
         mNameEditText       = findViewById(R.id.activityDonorRegistration_nameEditText)
         mRegistrationButton = findViewById(R.id.activityDonorRegistration_registerButton)
         mProgressBar        = findViewById(R.id.activityDonorRegistration_progressBar)
+        mPhoneEditText      = findViewById(R.id.activityDonorRegistration_phoneEditText)
 
         ArrayAdapter.createFromResource(
             this,

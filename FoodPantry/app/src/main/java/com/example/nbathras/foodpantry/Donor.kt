@@ -4,5 +4,6 @@ data class Donor (
     val userId: String    = "",
     val donorId: String   = "",
     val donorType: String = "",
-    val donorName: String = ""
+    val donorName: String = "",
+    val donorPhone: String = ""
 )
