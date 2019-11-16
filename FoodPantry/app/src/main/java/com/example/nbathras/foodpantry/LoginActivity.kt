@@ -93,8 +93,8 @@ class LoginActivity : AppCompatActivity() {
                                 }
 
                                 val intent = Intent(this@LoginActivity, DonorSplashActivity::class.java)
+                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
                                 startActivity(intent)
-
                                 finish()
                             }
                         }
@@ -123,8 +123,8 @@ class LoginActivity : AppCompatActivity() {
                                 }
 
                                 val intent = Intent(this@LoginActivity, DistributorSplashActivity::class.java)
+                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
                                 startActivity(intent)
-
                                 finish()
                             }
                         }

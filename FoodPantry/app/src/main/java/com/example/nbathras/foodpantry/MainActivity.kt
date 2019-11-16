@@ -37,6 +37,8 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+
+
     private fun initializeViews() {
         mDonorRegisterButton        = findViewById(R.id.activityMain_registerDonorButton)
         mDistributorRegistrationButton = findViewById(R.id.activityMain_registerDistributorButton)
