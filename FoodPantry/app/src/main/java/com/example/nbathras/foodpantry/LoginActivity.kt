@@ -117,7 +117,7 @@ class LoginActivity : AppCompatActivity() {
                                     editor.putString(USER_EMAIL, userEMAIL)
                                     editor.putString(USER_NAME, distributor?.distributorName)
                                     editor.putString(USER_DISTRIBUTOR_ABOUT, distributor?.distributorAbout)
-                                    editor.putString(USER_DISTRIBUTOR_ADDRESS, distributor?.distributorAddress)
+                                    // editor.putString(USER_DISTRIBUTOR_ADDRESS, distributor?.distributorAddress)
                                     editor.apply()
                                     editor.commit()
                                 }

@@ -9,6 +9,7 @@ import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.core.view.children
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 
@@ -59,6 +60,14 @@ class DistributorRegistrationActivity : AppCompatActivity() {
         val address: String  = mAddressEditText.text.toString().trim { it <= ' ' }
         val about: String    = mAboutEditText.text.toString().trim { it <= ' ' }
 
+        var locationList: ArrayList<String> = ArrayList<String>()
+        locationList.add(address)
+
+        for (nextView: View in mAdditionAddressLinearLayout.children) {
+            val mNextLocationEditText = nextView as EditText
+            locationList.add(mNextLocationEditText.text.toString().trim { it <= ' ' })
+        }
+
         // ToDo: Probably should check if the email entered was valid as well
         if (TextUtils.isEmpty(email)) {
             Toast.makeText(applicationContext, "Please enter email!", Toast.LENGTH_LONG).show()
@@ -90,7 +99,7 @@ class DistributorRegistrationActivity : AppCompatActivity() {
                     val mDatabaseReference = mDatabase.getReference("distributors").child(userID)
 
                     val id = (mDatabaseReference.push()).key.toString()
-                    val distributor = Distributor(userID, id, name, address, about)
+                    val distributor = Distributor(userID, id, name, about, locationList)
                     mDatabaseReference.child(id).setValue(distributor)
 
                     // Opens login activity
@@ -105,7 +114,7 @@ class DistributorRegistrationActivity : AppCompatActivity() {
                         "Registration failed!  Please try again later",
                         Toast.LENGTH_LONG
                     ).show()
-                    mProgressBar!!.visibility = View.GONE
+                    mProgressBar.visibility = View.GONE
                 }
             }
     }
