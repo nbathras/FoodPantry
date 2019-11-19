@@ -56,7 +56,7 @@ class LoginActivity : AppCompatActivity() {
         }
 
         val mAuth = FirebaseAuth.getInstance()
-        mAuth!!.signInWithEmailAndPassword(email, password)
+        mAuth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     Toast.makeText(
@@ -93,8 +93,8 @@ class LoginActivity : AppCompatActivity() {
                                 }
 
                                 val intent = Intent(this@LoginActivity, DonorSplashActivity::class.java)
+                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
                                 startActivity(intent)
-
                                 finish()
                             }
                         }
@@ -117,14 +117,14 @@ class LoginActivity : AppCompatActivity() {
                                     editor.putString(USER_EMAIL, userEMAIL)
                                     editor.putString(USER_NAME, distributor?.distributorName)
                                     editor.putString(USER_DISTRIBUTOR_ABOUT, distributor?.distributorAbout)
-                                    editor.putString(USER_DISTRIBUTOR_ADDRESS, distributor?.distributorAddress)
+                                    // editor.putString(USER_DISTRIBUTOR_ADDRESS, distributor?.distributorAddress)
                                     editor.apply()
                                     editor.commit()
                                 }
 
                                 val intent = Intent(this@LoginActivity, DistributorSplashActivity::class.java)
+                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
                                 startActivity(intent)
-
                                 finish()
                             }
                         }
