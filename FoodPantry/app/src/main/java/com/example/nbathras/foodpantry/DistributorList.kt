@@ -9,7 +9,7 @@ import android.widget.ArrayAdapter
 import android.widget.TextView
 
 //Customized adapter for DonorSplashActivity
-class DistributorList(private val context:Activity, internal var distributors: List<Distributor>):
+class DistributorList(val context:Activity, var distributors: List<Distributor>):
     ArrayAdapter<Distributor>(context,R.layout.donor_splash_list_item, distributors){
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {

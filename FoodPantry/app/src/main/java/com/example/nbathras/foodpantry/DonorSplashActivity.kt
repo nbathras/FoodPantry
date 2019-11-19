@@ -34,7 +34,7 @@ class DonorSplashActivity : AppCompatActivity() {
         //Obtaining specific userID through sharedPreferences
         userUID = sharedPreferences.getString(USER_ID, "Null").toString()
         //Accessing distributors list from firebase database
-        databaseDistributors = FirebaseDatabase.getInstance().getReference("distributors").child(userUID)
+        databaseDistributors = FirebaseDatabase.getInstance().getReference("distributors")
         //distributors arraylist to be populated with values from databaseDistributors
         distributors = ArrayList()
         //List view defined in layout file
