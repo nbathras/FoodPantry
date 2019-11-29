@@ -10,9 +10,12 @@ import android.widget.SeekBar
 import android.widget.TextView
 import org.w3c.dom.Text
 
+
 //Customized adapter for DonorSubmitRequestActivity
 class DonationToDistributorListItem(private val context: Activity, var itemsList: ArrayList<Pair<String, Pair<Int, Int>>>):
     ArrayAdapter<Pair<String, Pair<Int, Int>>>(context,R.layout.activity_donation_to_distributor_list_item, itemsList) {
+
+    var seekBarValues: HashMap<String, Int> = HashMap<String, Int>()
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         //inflating donor_splash_list_item layout
@@ -39,7 +42,7 @@ class DonationToDistributorListItem(private val context: Activity, var itemsList
             SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seek: SeekBar,
                                            progress: Int, fromUser: Boolean) {
-                // write custom code for progress is changed
+                seekBarValues.put(request.first,progress)
             }
 
             override fun onStartTrackingTouch(seek: SeekBar) {

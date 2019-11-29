@@ -6,17 +6,20 @@ import android.widget.Button
 import android.widget.ListView
 import android.widget.TextView
 import com.google.firebase.database.*
+import org.w3c.dom.Text
 import java.io.Serializable
+import java.util.ArrayList
 
 class DonorSubmitRequestActivity : AppCompatActivity() {
 
     private lateinit var distributorName: TextView
     private lateinit var donationToDistributorListView: ListView
-    private lateinit var requestItemsList: MutableList<Pair<String, Pair<Int, Int>>>
-    private lateinit var databaseDistributorRequestItems: DatabaseReference
-    private lateinit var donationToDistributorList: DistributorRequestList
+    private lateinit var requestItemsList: ArrayList<Pair<String, Pair<Int, Int>>>
     private lateinit var donationToDistributorListAdapter: DonationToDistributorListItem
     private lateinit var submitButton: Button
+    private lateinit var donationDateTitle: TextView
+    private lateinit var seekBarValueMap: HashMap<String, Int>
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,11 +33,22 @@ class DonorSubmitRequestActivity : AppCompatActivity() {
         donationToDistributorListView = findViewById(R.id.RequestListView)
         submitButton = findViewById(R.id.SubmitButton)
         requestItemsList = intent.getSerializableExtra(DistributorPageRequestActivity.REQUEST_ITEMS)
-                as MutableList<Pair<String, Pair<Int, Int>>>
+                as ArrayList<Pair<String, Pair<Int, Int>>>
+
+        donationDateTitle = findViewById(R.id.DonationLabelTextView)
+        donationDateTitle.text = intent.getStringExtra(DistributorPageRequestActivity.REQUEST_DATE)
+
+        submitButton.setOnClickListener {
+            seekBarValueMap = DonationToDistributorListItem(this@DonorSubmitRequestActivity,
+                requestItemsList).seekBarValues
+        }
 
     }
     override fun onStart() {
         super.onStart()
+        donationToDistributorListAdapter = DonationToDistributorListItem(this@DonorSubmitRequestActivity,
+            requestItemsList)
+        donationToDistributorListView.adapter = donationToDistributorListAdapter
         }
 
     }

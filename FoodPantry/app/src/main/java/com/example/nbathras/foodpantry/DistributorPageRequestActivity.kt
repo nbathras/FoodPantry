@@ -55,6 +55,7 @@ class DistributorPageRequestActivity : AppCompatActivity() {
                 intent.putExtra(DISTRIBUTOR_ID, distributorID)
                 intent.putExtra(REQUEST_ID, request.requestId)
                 intent.putExtra(REQUEST_ITEMS, request.itemsList)
+                intent.putExtra(REQUEST_DATE, request.finishDate)
                 startActivity(intent)
             }
     }
@@ -77,6 +78,7 @@ class DistributorPageRequestActivity : AppCompatActivity() {
                 listViewRequestAdapter = DistributorRequestList(this@DistributorPageRequestActivity,
                     distributorRequest)
                 listViewDistributorRequest.adapter = listViewRequestAdapter
+
             }
 
             override fun onCancelled(p0: DatabaseError) {
@@ -93,6 +95,7 @@ class DistributorPageRequestActivity : AppCompatActivity() {
         private val TAG = "DistributorPageRequestActivity"
             const val REQUEST_ID = "requestID"
             const val REQUEST_ITEMS = "requestItems"
+            const val REQUEST_DATE = "requestDate"
     }
 
 }
