@@ -88,6 +88,7 @@ class LoginActivity : AppCompatActivity() {
                                     editor.putString(USER_EMAIL, userEMAIL)
                                     editor.putString(USER_NAME, donor?.donorName)
                                     editor.putString(USER_DONOR_TYPE, donor?.donorType)
+                                    editor.putString(USER_DONOR_ID, donor?.donorId)
                                     editor.apply()
                                     editor.commit()
                                 }
@@ -117,6 +118,7 @@ class LoginActivity : AppCompatActivity() {
                                     editor.putString(USER_EMAIL, userEMAIL)
                                     editor.putString(USER_NAME, distributor?.distributorName)
                                     editor.putString(USER_DISTRIBUTOR_ABOUT, distributor?.distributorAbout)
+                                    editor.putString(USER_DISTRIBUTOR_ID, distributor?.distributorId)
                                     // editor.putString(USER_DISTRIBUTOR_ADDRESS, distributor?.distributorAddress)
                                     editor.apply()
                                     editor.commit()
@@ -161,8 +163,10 @@ class LoginActivity : AppCompatActivity() {
         const val USER_EMAIL      = "userEmail"
         const val USER_NAME       = "userName"
 
+        const val USER_DONOR_ID   = "userDonorID"
         const val USER_DONOR_TYPE = "userDonorType"
 
+        const val USER_DISTRIBUTOR_ID      = "userDistributorID"
         const val USER_DISTRIBUTOR_ADDRESS = "userDistributorAddress"
         const val USER_DISTRIBUTOR_ABOUT   = "userDistributorAbout"
     }

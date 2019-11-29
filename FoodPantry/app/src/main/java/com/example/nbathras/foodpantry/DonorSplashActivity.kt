@@ -59,6 +59,7 @@ class DonorSplashActivity : AppCompatActivity() {
                 intent.putExtra(DISTRIBUTOR_ABOUT, distributor.distributorAbout)
                 intent.putExtra(USER_ID, userUID)
                 intent.putExtra(DISTRIBUTOR_ID,distributor.distributorId)
+
                 startActivity(intent)
             }
     }
@@ -102,12 +103,14 @@ class DonorSplashActivity : AppCompatActivity() {
 
             val intent = Intent(this, MainActivity::class.java)
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
-            startActivity(intent);
+            startActivity(intent)
 
             return true
         }
         if (item.itemId == R.id.loggedInMenu_editProfileItem) {
-            Toast.makeText(this, "This should edit profile", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, DonorEditActivity::class.java)
+            startActivity(intent)
+
             return true
         }
 
