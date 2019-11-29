@@ -54,7 +54,6 @@ class DonorSplashActivity : AppCompatActivity() {
                 val intent = Intent(applicationContext, DistributorPageRequestActivity::class.java)
 
                 intent.putExtra(DISTRIBUTOR_NAME, distributor.distributorName)
-                // intent.putExtra(DISTRIBUTOR_ADDRESS, distributor.distributorAddress)
                 intent.putExtra(DISTRIBUTOR_ABOUT, distributor.distributorAbout)
                 intent.putExtra(USER_ID, userUID)
                 intent.putExtra(DISTRIBUTOR_ID,distributor.distributorId)
