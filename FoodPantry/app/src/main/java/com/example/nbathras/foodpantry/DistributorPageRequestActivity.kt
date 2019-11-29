@@ -41,8 +41,23 @@ class DistributorPageRequestActivity : AppCompatActivity() {
 
         databaseDistributorRequest = FirebaseDatabase.getInstance().getReference("requests").
             child(intent.getStringExtra(DISTRIBUTOR_ID))
-    }
 
+        val distributorID = intent.getStringExtra(DISTRIBUTOR_ID)
+        val userID = intent.getStringExtra(USER_ID)
+        val distributorName = intent.getStringExtra(DISTRIBUTOR_NAME)
+
+
+        listViewDistributorRequest.onItemClickListener =
+            AdapterView.OnItemClickListener { adapterView, view, i, l ->
+
+                val request = distributorRequest[i]
+                val intent = Intent(applicationContext,DonationToDistributorListItem::class.java)
+                intent.putExtra(DISTRIBUTOR_ID, distributorID)
+                intent.putExtra(REQUEST_ID, request.requestId)
+                intent.putExtra(REQUEST_ITEMS, request.itemsList)
+                startActivity(intent)
+            }
+    }
 
     override fun onStart() {
         super.onStart()
@@ -76,6 +91,8 @@ class DistributorPageRequestActivity : AppCompatActivity() {
         const val DISTRIBUTOR_ABOUT = "distributorAbout"
         const val DISTRIBUTOR_ID = "distributorID"
         private val TAG = "DistributorPageRequestActivity"
+            const val REQUEST_ID = "requestID"
+            const val REQUEST_ITEMS = "requestItems"
     }
 
 }
