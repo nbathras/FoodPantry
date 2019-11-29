@@ -53,11 +53,12 @@ class DonorSplashActivity : AppCompatActivity() {
                 val distributor = distributors[i]
                 val intent = Intent(applicationContext, DistributorPageRequestActivity::class.java)
 
+
+                //This is a test
                 intent.putExtra(DISTRIBUTOR_NAME, distributor.distributorName)
                 intent.putExtra(DISTRIBUTOR_ABOUT, distributor.distributorAbout)
                 intent.putExtra(USER_ID, userUID)
                 intent.putExtra(DISTRIBUTOR_ID,distributor.distributorId)
-                
                 startActivity(intent)
             }
     }
