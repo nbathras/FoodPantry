@@ -36,7 +36,7 @@ class DonorRegistrationActivity : AppCompatActivity() {
 
         val email: String    = mEmailEditText.text.toString()
         val password: String = mPasswordEditText.text.toString()
-        val type: String     = mTypeSpinner.toString().trim { it <= ' ' }
+        val type: String     = mTypeSpinner.selectedItem.toString().trim { it <= ' ' }
         val name: String     = mNameEditText.text.toString().trim { it <= ' ' }
         val phone: String    = mPhoneEditText.text.toString().trim { it <= ' ' }
 
@@ -48,15 +48,6 @@ class DonorRegistrationActivity : AppCompatActivity() {
         // ToDo: Probably should do a check if it is the correct length and the correct number of different character types
         if (TextUtils.isEmpty(password)) {
             Toast.makeText(applicationContext, "Please enter password!", Toast.LENGTH_LONG).show()
-            return
-        }
-
-        if (TextUtils.isEmpty(type)) {
-            Toast.makeText(applicationContext, "Please enter type!", Toast.LENGTH_LONG).show()
-            return
-        }
-        if (TextUtils.isEmpty(name)) {
-            Toast.makeText(applicationContext, "Please enter name!", Toast.LENGTH_LONG).show()
             return
         }
 

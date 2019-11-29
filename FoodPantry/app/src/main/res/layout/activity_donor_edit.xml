@@ -16,7 +16,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/donor_registration_description" />
+            android:text="Edit Donor Existing Account" />
     </LinearLayout>
 
     <ScrollView
@@ -30,41 +30,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
-            <!-- Login Information -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_weight="1">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="24dp"
-                    android:textStyle="bold"
-                    android:text="Login Information:"/>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_marginLeft="8dp">
-
-                    <EditText
-                        android:id="@+id/activityDonorRegistration_emailEditText"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/email_edit_text_hint" />
-
-                    <EditText
-                        android:id="@+id/activityDonorRegistration_passwordEditText"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/password_edit_text_hint"
-                        android:inputType="textPassword" />
-                </LinearLayout>
-            </LinearLayout>
 
             <!-- Profile Information -->
             <LinearLayout
@@ -119,13 +84,14 @@
             android:id="@+id/activityDonorRegistration_progressBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:visibility="gone" />
 
         <Button
-        android:id="@+id/activityDonorRegistration_registerButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Register" />
+            android:id="@+id/activityDonorEdit_saveButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Save" />
     </LinearLayout>
 
 

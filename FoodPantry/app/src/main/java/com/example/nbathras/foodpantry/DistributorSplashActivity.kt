@@ -37,7 +37,9 @@ class DistributorSplashActivity : AppCompatActivity() {
             return true
         }
         if (item.itemId == R.id.loggedInMenu_editProfileItem) {
-            Toast.makeText(this, "This should edit profile", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, DistributorEditActivity::class.java)
+            startActivity(intent)
+
             return true
         }
 

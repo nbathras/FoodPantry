@@ -1,24 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:layout_margin="4dp"
-    tools:context=".DonorRegistrationActivity">
+    tools:context=".DistributorRegistrationActivity">
 
+    <!-- Header -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/donor_registration_description" />
+            android:text="Edit Distributor Existing Account" />
     </LinearLayout>
 
+    <!-- All Input Fields -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -30,41 +32,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
-            <!-- Login Information -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_weight="1">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="24dp"
-                    android:textStyle="bold"
-                    android:text="Login Information:"/>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_marginLeft="8dp">
-
-                    <EditText
-                        android:id="@+id/activityDonorRegistration_emailEditText"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/email_edit_text_hint" />
-
-                    <EditText
-                        android:id="@+id/activityDonorRegistration_passwordEditText"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/password_edit_text_hint"
-                        android:inputType="textPassword" />
-                </LinearLayout>
-            </LinearLayout>
 
             <!-- Profile Information -->
             <LinearLayout
@@ -87,28 +54,57 @@
                     android:layout_marginLeft="8dp">
 
                     <EditText
-                        android:id="@+id/activityDonorRegistration_nameEditText"
+                        android:id="@+id/activityDistributorRegistration_nameEditText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/name_edit_text_hint"/>
 
-                    <Spinner
-                        android:id="@+id/activityDonorRegistration_typeSpinner"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-
-                    <EditText
-                        android:id="@+id/activityDonorRegistration_phoneEditText"
+                    <!-- Address original plus button -->
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Phone Number"/>
+                        android:orientation="horizontal">
+
+                        <EditText
+                            android:id="@+id/activityDistributorRegistration_addressEditText"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:hint="@string/address_edit_text_hint"/>
+
+                        <Button
+                            android:id="@+id/activityDistributorRegistration_addAddressbutton"
+                            android:layout_width="64dp"
+                            android:layout_height="wrap_content"
+                            android:text="Add+"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/activityDistributorRegistration_additionAddressLinearLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:orientation="vertical">
+
+                    </LinearLayout>
+
+                    <EditText
+                        android:id="@+id/activityDistributorRegistration_aboutEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:gravity="start|top"
+                        android:inputType="textMultiLine"
+                        android:scrollbars="vertical"
+                        android:hint="@string/about_edit_text_hint"/>
                 </LinearLayout>
 
             </LinearLayout>
-        </LinearLayout>
 
+        </LinearLayout>
     </ScrollView>
 
+    <!-- Submit Button + Progress Bar -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -116,17 +112,17 @@
         android:orientation="vertical">
 
         <ProgressBar
-            android:id="@+id/activityDonorRegistration_progressBar"
+            android:id="@+id/activityDistributorRegistration_progressBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="gone" />
+            android:layout_gravity="center"
+            android:visibility="gone"/>
 
         <Button
-        android:id="@+id/activityDonorRegistration_registerButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Register" />
+            android:id="@+id/activityDistributorEdit_saveButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Save" />
     </LinearLayout>
 
-
-</LinearLayout>
+</RelativeLayout>
