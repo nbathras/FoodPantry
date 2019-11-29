@@ -30,8 +30,8 @@ class DistributorRegistrationActivity : AppCompatActivity() {
     private var numAddressEditText = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_distributor_registration)
+            super.onCreate(savedInstanceState)
+            setContentView(R.layout.activity_distributor_registration)
 
         initializeViews()
 
