@@ -16,6 +16,7 @@
         <activity android:name=".DistributorList" />
         <activity android:name=".DistributorSplashActivity" />
         <activity android:name=".DonorSplashActivity" />
+        <activity android:name=".InventoryActivity" />
         <activity
             android:name=".DistributorRegistrationActivity"
             android:windowSoftInputMode="adjustPan" />
