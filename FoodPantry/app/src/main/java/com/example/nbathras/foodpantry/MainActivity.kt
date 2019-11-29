@@ -10,9 +10,9 @@ import android.widget.Button
 
 class MainActivity : AppCompatActivity() {
 
-    private var mDonorRegisterButton: Button?           = null
+    private var mDonorRegisterButton: Button? = null
     private var mDistributorRegistrationButton: Button? = null
-    private var mLoginButton: Button?                   = null
+    private var mLoginButton: Button? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
