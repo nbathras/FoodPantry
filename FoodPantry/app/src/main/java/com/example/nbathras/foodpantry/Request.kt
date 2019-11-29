@@ -1,10 +1,12 @@
 package com.example.nbathras.foodpantry
 
 import java.util.*
+import kotlin.collections.HashMap
 
 data class Request (
+    val distributorId: String = "",
+    val requestId: String = "",
     val finishDate: String = "",
-    val requestName: String = "",
-    val currRequestNum: Int = 0,
-    val requestNumNeeded:Int = 0
+    val itemsList: ArrayList<Pair<String, Pair<Int, Int>>> = ArrayList<Pair<String, Pair<Int, Int>>>()
+
 )
