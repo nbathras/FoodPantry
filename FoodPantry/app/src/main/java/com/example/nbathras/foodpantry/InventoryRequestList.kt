@@ -10,21 +10,26 @@ import android.widget.TextView
 import org.w3c.dom.Text
 
 //Customized adapter for DistributorPageRequestActivity
-class DistributorRequestList(private val context:Activity, var requests: List<Request>):
-    ArrayAdapter<Request>(context,R.layout.activity_distributor_request_list, requests) {
+class InventoryRequestList(val context:Activity, var inventories: List<Inventory>):
+    ArrayAdapter<Inventory>(context,R.layout.inventory_list_item, inventories){
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         //inflating donor_splash_list_item layout
         val inflater = context.layoutInflater
-        val listViewItem = inflater.inflate(R.layout.activity_distributor_request_list, null, true)
+        val listViewItem = inflater.inflate(R.layout.inventory_list_item, null, true)
 
-        val requestFinishDateText = listViewItem.findViewById<TextView>(R.id.requestFinishDate)
+        val textViewInventoryItem = listViewItem.findViewById<View>(R.id.inventoryItem) as TextView
+        val textViewInventoryQuantity = listViewItem.findViewById<View>(R.id.inventoryQuantity) as TextView
+        val textViewInventoryDropOff = listViewItem.findViewById<View>(R.id.inventoryDropOff) as TextView
 
-        val request = requests[position]
-        requestFinishDateText.text = request.finishDate.toString()
+        val inventory = inventories[position]
+        //Populating 'name' and 'about' text fields for each list element
+        textViewInventoryItem.text = inventory.requestItem
+        textViewInventoryQuantity.text = inventory.requestQuantity
+        textViewInventoryDropOff.text = inventory.requestDropOff
 
         return listViewItem
     }
-
-
 }
+
+

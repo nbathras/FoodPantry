@@ -5,18 +5,37 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Button
-import android.widget.Toast
+import android.view.View
+import android.widget.*
+import com.google.firebase.database.*
 
 class DistributorSplashActivity : AppCompatActivity() {
 
     private var mAddRequestButton : Button? = null
 
+    var databaseInventories: DatabaseReference? = null
+    private lateinit var inventories: MutableList<Inventory>
+    private lateinit var listViewInventory: ListView
+    private lateinit var listViewAdapter: ArrayAdapter<Inventory>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_distributor_splash)
+        //getting the reference of artists node
+        databaseInventories = FirebaseDatabase.getInstance().getReference("inventories")
+        inventories = ArrayList()
 
+        //List view defined in layout file
+        listViewInventory = findViewById<View>(R.id.inventory_list) as ListView
+
+        //When the user clicks on a specific distributor list item, show their biography/request page
+        listViewInventory.onItemClickListener =
+            AdapterView.OnItemClickListener { adapterView, view, i, l ->
+                val distributor = inventories[i]
+                val intent = Intent(applicationContext, InventoryRequestList::class.java)
+
+                startActivity(intent)
+            }
         initializeUI()
 
         // look at the login activity
@@ -26,6 +45,30 @@ class DistributorSplashActivity : AppCompatActivity() {
         // System will probably change in soon when I come up with a better way to store everything
     }
 
+    override fun onStart() {
+        super.onStart()
+        databaseInventories!!.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                //clearing the previous distributors list
+                inventories.clear()
+
+                //populating the distributors array from the database
+                for (postSnapshot2 in dataSnapshot.children) {
+                    val inventory = postSnapshot2.getValue<Inventory>(Inventory::class.java)
+                    //add distributor to the list
+                    inventories.add(inventory!!)
+                }
+
+                //Initializing listViewAdapter to customized DistributorList adapter
+                listViewAdapter = InventoryRequestList(this@DistributorSplashActivity, inventories)
+                listViewInventory.adapter = listViewAdapter
+            }
+
+            override fun onCancelled(p0: DatabaseError) {
+                //Empty
+            }
+        })
+    }
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.logged_in_menu, menu)
 

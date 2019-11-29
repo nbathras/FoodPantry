@@ -31,4 +31,10 @@
     <string name="distributor_about">Distributor About</string>
 
 
+    <!--Layout Strings -->
+    <string name="inventory_item">Inventory Item</string>
+    <string name="inventory_quantity">Inventory Quantity</string>
+    <string name="inventory_drop_off">Inventory DropOff</string>
+
+
 </resources>

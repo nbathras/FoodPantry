@@ -12,6 +12,7 @@
         <activity android:name=".DistributorEditActivity"></activity>
         <activity android:name=".DonorEditActivity" />
         <activity android:name=".DistributorRequestList" />
+        <activity android:name=".InventoryRequestList" />
         <activity android:name=".DistributorPageRequestActivity" />
         <activity android:name=".DistributorList" />
         <activity android:name=".DistributorSplashActivity" />

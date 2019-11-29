@@ -89,7 +89,11 @@
     </LinearLayout>
 
 
-
+    <ListView
+        android:id="@+id/inventory_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+    </ListView>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"

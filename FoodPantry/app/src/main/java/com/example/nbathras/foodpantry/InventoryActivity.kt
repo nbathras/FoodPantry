@@ -2,11 +2,12 @@ package com.example.nbathras.foodpantry
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.google.firebase.auth.FirebaseAuth
+import android.text.TextUtils
+import android.view.View
+import android.widget.*
+import com.google.firebase.database.*
+
 
 class InventoryActivity : AppCompatActivity() {
 
@@ -15,18 +16,13 @@ class InventoryActivity : AppCompatActivity() {
     private lateinit var mDropOffEditText: EditText
     private lateinit var mAddRequestButton : Button
     private lateinit var mBackButton : Button
-
-    private lateinit var mAuth: FirebaseAuth
-
+    var databaseInventories: DatabaseReference? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_add_inventory)
-
-        mAuth = FirebaseAuth.getInstance()
-
-
+        setContentView(R.layout.activity_add_inventory);
+        databaseInventories = FirebaseDatabase.getInstance().getReference("inventories")
         initializeUI()
 
         mAddRequestButton.setOnClickListener {
@@ -38,6 +34,33 @@ class InventoryActivity : AppCompatActivity() {
         }
     }
 
+
+//    override fun onStart() {
+//        super.onStart()
+//
+//        //getting the reference of artists node
+//        databaseInventories = FirebaseDatabase.getInstance().getReference("inventories")
+//
+//
+//
+//        databaseInventories!!.addValueEventListener(object : ValueEventListener {
+//
+//            override fun onDataChange(dataSnapshot: DataSnapshot) {
+//                if (dataSnapshot.exists()) {
+//
+//                    for (locationSnapshot in dataSnapshot.children) {
+//                        val inventory = locationSnapshot.value!!.toString();
+//
+//                        Log.d("","Inventory: $inventory")
+//                    }
+//                }
+//            }
+//
+//            override fun onCancelled(databaseError: DatabaseError) {
+//                // Failed to read value
+//            }
+//        })
+//    }
     private fun addRequest() {
         val item: String    = mItemEditText.text.toString()
         val quantity: String = mQuantityEditText.text.toString()
@@ -58,7 +81,10 @@ class InventoryActivity : AppCompatActivity() {
             return
         }
 
+        // we are gonna save inventory to databse
 
+
+        addRequestObjectToDatabase(item,quantity,dropOff)
         //launch login activity
         val intent = Intent(this@InventoryActivity, DistributorSplashActivity::class.java)
         startActivity(intent)
@@ -67,8 +93,44 @@ class InventoryActivity : AppCompatActivity() {
 
     }
 
+    private fun addRequestObjectToDatabase(item : String, quantity: String, dropOff: String) {
+        //getting the values to save
+
+
+        //checking if the value is provided
+        if (!TextUtils.isEmpty(item)) {
+
+            //getting a unique id using push().getKey() method
+            //it will create a unique id and we will use it as the Primary Key for our Artist
+            // val id = databaseInventories.push().getKey()
+            val id = databaseInventories!!.push().key;
+            //creating an Artist Object
+            val inventory = Inventory(item, quantity, dropOff)
+
+            //Saving the Artist
+            val value = id?.let { databaseInventories!!.child(it).setValue(inventory) }
+
+            //setting edittext to blank again
+
+
+            //displaying a success toast
+            Toast.makeText(this, "Inventory added", Toast.LENGTH_LONG).show()
+
+
+
+
+
+
+        } else {
+            //if the value is not given displaying a toast
+            Toast.makeText(this, "Please enter a name", Toast.LENGTH_LONG).show()
+        }
+    }
+
+
+
     private fun initializeUI() {
-      mItemEditText = findViewById(R.id.activityAddInventory_itemEditText)
+        mItemEditText = findViewById(R.id.activityAddInventory_itemEditText)
         mQuantityEditText = findViewById(R.id.activityAddInventory_quantityEditText)
         mDropOffEditText = findViewById(R.id.activityAddInventory_dropOffEditText)
         mAddRequestButton= findViewById(R.id.activityAddInventory_addRequestButton)
