@@ -4,7 +4,7 @@ import java.util.*
 import kotlin.collections.HashMap
 
 data class Request (
-    val distributorId: String = "",
+    val deliveryDate: String = "",
     val requestId: String = "",
     val finishDate: String = "",
     val itemsList: ArrayList<Pair<String, Pair<Int, Int>>> = ArrayList<Pair<String, Pair<Int, Int>>>()
