@@ -49,6 +49,22 @@ class DonorEditActivity : AppCompatActivity() {
         val name: String     = mNameEditText.text.toString().trim { it <= ' ' }
         val phone: String    = mPhoneEditText.text.toString().trim { it <= ' ' }
 
+        if (TextUtils.isEmpty(type)) {
+            Toast.makeText(applicationContext, "Please enter a type!", Toast.LENGTH_LONG).show()
+            mProgressBar.visibility = View.GONE
+            return
+        }
+        if (TextUtils.isEmpty(name)) {
+            Toast.makeText(applicationContext, "Please enter a name!", Toast.LENGTH_LONG).show()
+            mProgressBar.visibility = View.GONE
+            return
+        }
+        if (TextUtils.isEmpty(phone)) {
+            Toast.makeText(applicationContext, "Please enter a phone!", Toast.LENGTH_LONG).show()
+            mProgressBar.visibility = View.GONE
+            return
+        }
+
         // Displays successful registration toast
         Toast.makeText(
             applicationContext,

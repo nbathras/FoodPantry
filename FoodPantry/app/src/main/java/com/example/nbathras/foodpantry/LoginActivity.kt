@@ -85,9 +85,6 @@ class LoginActivity : AppCompatActivity() {
                                     val editor = sharedPreferences.edit()
                                     editor.putString(USER_LOGIN_TYPE, "donors")
                                     editor.putString(USER_ID, userID)
-                                    editor.putString(USER_EMAIL, userEMAIL)
-                                    editor.putString(USER_NAME, donor?.donorName)
-                                    editor.putString(USER_DONOR_TYPE, donor?.donorType)
                                     editor.putString(USER_DONOR_ID, donor?.donorId)
                                     editor.apply()
                                     editor.commit()
@@ -115,11 +112,7 @@ class LoginActivity : AppCompatActivity() {
                                     val editor = sharedPreferences.edit()
                                     editor.putString(USER_LOGIN_TYPE, "distributor")
                                     editor.putString(USER_ID, userID)
-                                    editor.putString(USER_EMAIL, userEMAIL)
-                                    editor.putString(USER_NAME, distributor?.distributorName)
-                                    editor.putString(USER_DISTRIBUTOR_ABOUT, distributor?.distributorAbout)
                                     editor.putString(USER_DISTRIBUTOR_ID, distributor?.distributorId)
-                                    // editor.putString(USER_DISTRIBUTOR_ADDRESS, distributor?.distributorAddress)
                                     editor.apply()
                                     editor.commit()
                                 }
@@ -157,17 +150,12 @@ class LoginActivity : AppCompatActivity() {
         private const val TAG          = "FoodPantry"
         private const val ACTIVITY_TAG = "LoginActivity"
 
-        const val MY_PREFERENCE   = "myPreference"
-        const val USER_LOGIN_TYPE = "userLoginType"
-        const val USER_ID         = "userID"
-        const val USER_EMAIL      = "userEmail"
-        const val USER_NAME       = "userName"
+        const val MY_PREFERENCE = "myPreference"
 
-        const val USER_DONOR_ID   = "userDonorID"
-        const val USER_DONOR_TYPE = "userDonorType"
+        const val USER_LOGIN_TYPE     = "userLoginType"
+        const val USER_ID             = "userID"
+        const val USER_DONOR_ID       = "userDonorID"
+        const val USER_DISTRIBUTOR_ID = "userDistributorID"
 
-        const val USER_DISTRIBUTOR_ID      = "userDistributorID"
-        const val USER_DISTRIBUTOR_ADDRESS = "userDistributorAddress"
-        const val USER_DISTRIBUTOR_ABOUT   = "userDistributorAbout"
     }
 }

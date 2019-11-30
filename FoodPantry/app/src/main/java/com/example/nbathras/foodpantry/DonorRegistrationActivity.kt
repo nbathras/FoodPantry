@@ -40,14 +40,29 @@ class DonorRegistrationActivity : AppCompatActivity() {
         val name: String     = mNameEditText.text.toString().trim { it <= ' ' }
         val phone: String    = mPhoneEditText.text.toString().trim { it <= ' ' }
 
-        // ToDo: Probably should check if the email entered was valid as well
         if (TextUtils.isEmpty(email)) {
             Toast.makeText(applicationContext, "Please enter email!", Toast.LENGTH_LONG).show()
+            mProgressBar.visibility = View.GONE
             return
         }
-        // ToDo: Probably should do a check if it is the correct length and the correct number of different character types
         if (TextUtils.isEmpty(password)) {
             Toast.makeText(applicationContext, "Please enter password!", Toast.LENGTH_LONG).show()
+            mProgressBar.visibility = View.GONE
+            return
+        }
+        if (TextUtils.isEmpty(type)) {
+            Toast.makeText(applicationContext, "Please enter a type!", Toast.LENGTH_LONG).show()
+            mProgressBar.visibility = View.GONE
+            return
+        }
+        if (TextUtils.isEmpty(name)) {
+            Toast.makeText(applicationContext, "Please enter a name!", Toast.LENGTH_LONG).show()
+            mProgressBar.visibility = View.GONE
+            return
+        }
+        if (TextUtils.isEmpty(phone)) {
+            Toast.makeText(applicationContext, "Please enter a phone!", Toast.LENGTH_LONG).show()
+            mProgressBar.visibility = View.GONE
             return
         }
 

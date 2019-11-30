@@ -59,6 +59,29 @@ class DistributorEditActivity : AppCompatActivity() {
             locationList.add(mNextLocationEditText.text.toString().trim { it <= ' ' })
         }
 
+        if (TextUtils.isEmpty(name)) {
+            Toast.makeText(applicationContext, "Please enter name!", Toast.LENGTH_LONG).show()
+            mProgressBar.visibility = View.GONE
+            return
+        }
+        if (TextUtils.isEmpty(address)) {
+            Toast.makeText(applicationContext, "Please enter address!", Toast.LENGTH_LONG).show()
+            mProgressBar.visibility = View.GONE
+            return
+        }
+        for (locationString : String in locationList) {
+            if (TextUtils.isEmpty(locationString)) {
+                Toast.makeText(applicationContext, "Please enter address!", Toast.LENGTH_LONG).show()
+                mProgressBar.visibility = View.GONE
+                return
+            }
+        }
+        if (TextUtils.isEmpty(about)) {
+            Toast.makeText(applicationContext, "Please enter about!", Toast.LENGTH_LONG).show()
+            mProgressBar.visibility = View.GONE
+            return
+        }
+
         Toast.makeText(
             applicationContext,
             "Registration successful!",
