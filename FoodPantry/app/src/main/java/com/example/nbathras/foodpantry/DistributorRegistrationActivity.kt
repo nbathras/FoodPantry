@@ -12,6 +12,7 @@ import android.widget.*
 import androidx.core.view.children
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
+import org.w3c.dom.Text
 
 class DistributorRegistrationActivity : AppCompatActivity() {
 
@@ -68,14 +69,36 @@ class DistributorRegistrationActivity : AppCompatActivity() {
             locationList.add(mNextLocationEditText.text.toString().trim { it <= ' ' })
         }
 
-        // ToDo: Probably should check if the email entered was valid as well
         if (TextUtils.isEmpty(email)) {
             Toast.makeText(applicationContext, "Please enter email!", Toast.LENGTH_LONG).show()
+            mProgressBar.visibility = View.GONE
             return
         }
-        // ToDo: Probably should do a check if it is the correct length and the correct number of different character types
         if (TextUtils.isEmpty(password)) {
             Toast.makeText(applicationContext, "Please enter password!", Toast.LENGTH_LONG).show()
+            mProgressBar.visibility = View.GONE
+            return
+        }
+        if (TextUtils.isEmpty(name)) {
+            Toast.makeText(applicationContext, "Please enter name!", Toast.LENGTH_LONG).show()
+            mProgressBar.visibility = View.GONE
+            return
+        }
+        if (TextUtils.isEmpty(address)) {
+            Toast.makeText(applicationContext, "Please enter address!", Toast.LENGTH_LONG).show()
+            mProgressBar.visibility = View.GONE
+            return
+        }
+        for (locationString : String in locationList) {
+            if (TextUtils.isEmpty(locationString)) {
+                Toast.makeText(applicationContext, "Please enter address!", Toast.LENGTH_LONG).show()
+                mProgressBar.visibility = View.GONE
+                return
+            }
+        }
+        if (TextUtils.isEmpty(about)) {
+            Toast.makeText(applicationContext, "Please enter about!", Toast.LENGTH_LONG).show()
+            mProgressBar.visibility = View.GONE
             return
         }
 

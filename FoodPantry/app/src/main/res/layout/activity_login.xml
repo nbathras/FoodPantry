@@ -5,60 +5,76 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:layout_margin="4dp"
     tools:context=".LoginActivity">
 
-    <TextView
-        android:id="@+id/activityLogin_emailTextView"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="4dp"
-        android:text="@string/email_string"
-        android:textAppearance="@android:style/TextAppearance.Material.Medium" />
+        android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/activityLogin_emailEditText"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Login Account" />
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/enter_email_hint"
-        android:inputType="text"
-        android:paddingBottom="12dp"
-        android:textAppearance="@android:style/TextAppearance.Material.Medium"
-        tools:ignore="Autofill" />
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/activityLogin_passwordTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingBottom="4dp"
-        android:text="@string/password_string"
-        android:textAppearance="@android:style/TextAppearance.Material.Medium" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="24dp"
+            android:textStyle="bold"
+            android:text="Login Information:"/>
 
+        <EditText
+            android:id="@+id/activityLogin_emailEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/enter_email_hint"
+            android:inputType="text"
+            android:paddingBottom="12dp"
+            android:textAppearance="@android:style/TextAppearance.Material.Medium"
+            tools:ignore="Autofill" />
 
-    <EditText
-        android:id="@+id/activityLogin_passwordEditText"
+        <EditText
+            android:id="@+id/activityLogin_passwordEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/enter_password_hint"
+            android:inputType="textPassword"
+            android:paddingBottom="12dp"
+            android:textAppearance="@android:style/TextAppearance.Material.Medium"
+            tools:ignore="Autofill" />
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/enter_password_hint"
-        android:inputType="textPassword"
-        android:paddingBottom="12dp"
-        android:textAppearance="@android:style/TextAppearance.Material.Medium"
-        tools:ignore="Autofill" />
+        android:layout_height="match_parent"
+        android:gravity="bottom"
+        android:orientation="vertical">
 
-    <Button
-        android:id="@+id/activityLogin_loginButton"
-        style="@android:style/Widget.Material.Button.Borderless.Colored"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        android:text="@string/login_string"
-        android:textAppearance="@android:style/TextAppearance.Material.Medium"
-        android:textColor="@color/colorWhite" />
-        <!-- android:onClick="onClick" /> -->
+        <ProgressBar
+            android:id="@+id/activityLogin_progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone" />
 
-    <ProgressBar
-        android:id="@+id/activityLogin_progressBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone" />
+        <Button
+            android:id="@+id/activityLogin_loginButton"
+            android:layout_margin="4dp"
+            style="@android:style/Widget.Material.Button.Borderless.Colored"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:text="@string/login_string"
+            android:textAppearance="@android:style/TextAppearance.Material.Medium"
+            android:textColor="@color/colorWhite" />
+    </LinearLayout>
 
 </LinearLayout>
