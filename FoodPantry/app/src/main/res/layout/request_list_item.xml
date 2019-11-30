@@ -7,7 +7,7 @@
     tools:context=".InventoryList">
 
     <TextView
-        android:id="@+id/inventoryItem"
+        android:id="@+id/requestItem"
         android:layout_width="183dp"
         android:layout_height="36dp"
         android:layout_marginLeft="15dp"
@@ -17,20 +17,20 @@
         android:textAppearance="@android:style/TextAppearance.Material.Medium" />
 
     <TextView
-        android:id="@+id/inventoryQuantity"
+        android:id="@+id/requestQuantity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/inventoryItem"
+        android:layout_below="@id/requestItem"
         android:layout_marginStart="16dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="16dp"
         android:text="@string/inventory_quantity" />
 
     <TextView
-        android:id="@+id/inventoryDropOff"
+        android:id="@+id/requestFinishDate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/inventoryQuantity"
+        android:layout_below="@id/requestQuantity"
         android:layout_marginStart="16dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="16dp"

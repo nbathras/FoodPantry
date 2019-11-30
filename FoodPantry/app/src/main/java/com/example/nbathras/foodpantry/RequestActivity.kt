@@ -4,34 +4,33 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.text.TextUtils
-import android.view.View
 import android.widget.*
 import com.google.firebase.database.*
+import java.util.ArrayList
 
 
-class InventoryActivity : AppCompatActivity() {
+class RequestActivity : AppCompatActivity() {
 
     private lateinit var mItemEditText: EditText
-    private lateinit var mQuantityEditText: EditText
-    private lateinit var mDropOffEditText: EditText
+    private lateinit var mQuantityDesiredEditText: EditText
+    private lateinit var mCurrentQuantityEditText: EditText
+    private lateinit var mFinishDateEditText: EditText
+    private lateinit var requestItemsList: ArrayList<Pair<String, Pair<Int, Int>>>
     private lateinit var mAddRequestButton : Button
-    private lateinit var mBackButton : Button
-    var databaseInventories: DatabaseReference? = null
+    var databaseRequests: DatabaseReference? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_add_inventory);
-        databaseInventories = FirebaseDatabase.getInstance().getReference("inventories")
+        setContentView(R.layout.activity_add_request);
+        databaseRequests = FirebaseDatabase.getInstance().getReference("inventories")
         initializeUI()
 
         mAddRequestButton.setOnClickListener {
             addRequest()
         }
 
-        mBackButton.setOnClickListener {
-            finish()
-        }
+
     }
 
 
@@ -63,8 +62,8 @@ class InventoryActivity : AppCompatActivity() {
 //    }
     private fun addRequest() {
         val item: String    = mItemEditText.text.toString()
-        val quantity: String = mQuantityEditText.text.toString()
-        val dropOff: String     = mDropOffEditText.text.toString()
+        val quantity: String = mQuantityDesiredEditText.text.toString()
+        val dropOff: String     = mFinishDateEditText.text.toString()
 
         if (item.isEmpty()) {
             Toast.makeText(this, "Please enter item name", Toast.LENGTH_SHORT).show()
@@ -81,15 +80,13 @@ class InventoryActivity : AppCompatActivity() {
             return
         }
 
-        // we are gonna save inventory to databse
+        // saves request to the database
 
 
         addRequestObjectToDatabase(item,quantity,dropOff)
         //launch login activity
-        val intent = Intent(this@InventoryActivity, DistributorSplashActivity::class.java)
+        val intent = Intent(this@RequestActivity, DistributorSplashActivity::class.java)
         startActivity(intent)
-
-
 
     }
 
@@ -103,22 +100,18 @@ class InventoryActivity : AppCompatActivity() {
             //getting a unique id using push().getKey() method
             //it will create a unique id and we will use it as the Primary Key for our Artist
             // val id = databaseInventories.push().getKey()
-            val id = databaseInventories!!.push().key;
+            val id = databaseRequests!!.push().key;
             //creating an Artist Object
             val inventory = Inventory(item, quantity, dropOff)
 
-            //Saving the Artist
-            val value = id?.let { databaseInventories!!.child(it).setValue(inventory) }
+            //Saving the requests
+            val value = id?.let { databaseRequests!!.child(it).setValue(inventory) }
 
-            //setting edittext to blank again
+            //setting edit text to blank again
 
 
             //displaying a success toast
-            Toast.makeText(this, "Inventory added", Toast.LENGTH_LONG).show()
-
-
-
-
+            Toast.makeText(this, "Request added", Toast.LENGTH_LONG).show()
 
 
         } else {
@@ -130,11 +123,11 @@ class InventoryActivity : AppCompatActivity() {
 
 
     private fun initializeUI() {
-        mItemEditText = findViewById(R.id.activityAddInventory_itemEditText)
-        mQuantityEditText = findViewById(R.id.activityAddInventory_quantityEditText)
-        mDropOffEditText = findViewById(R.id.activityAddInventory_dropOffEditText)
-        mAddRequestButton= findViewById(R.id.activityAddInventory_addRequestButton)
-        mBackButton= findViewById(R.id.activityAddInventory_backButton)
+        mItemEditText = findViewById(R.id.activityAddRequest_itemEditText)
+        mQuantityDesiredEditText = findViewById(R.id.activityAddRequest_quantityDesiredEditText)
+        mCurrentQuantityEditText = findViewById(R.id.activityAddRequest_currentQuantityEditText)
+        mFinishDateEditText = findViewById(R.id.activityAddRequest_finishDateEditText)
+        mAddRequestButton= findViewById(R.id.activityAddRequest_addRequestButton)
 
 
     }

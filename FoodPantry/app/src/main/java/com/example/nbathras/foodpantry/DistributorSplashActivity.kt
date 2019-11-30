@@ -26,7 +26,7 @@ class DistributorSplashActivity : AppCompatActivity() {
         inventories = ArrayList()
 
         //List view defined in layout file
-        listViewInventory = findViewById<View>(R.id.inventory_list) as ListView
+        listViewInventory = findViewById<View>(R.id.request_list) as ListView
 
         //When the user clicks on a specific distributor list item, show their biography/request page
         listViewInventory.onItemClickListener =
@@ -75,7 +75,7 @@ class DistributorSplashActivity : AppCompatActivity() {
 
 
         mAddRequestButton!!.setOnClickListener {
-            val intent = Intent(this@DistributorSplashActivity, InventoryActivity::class.java)
+            val intent = Intent(this@DistributorSplashActivity, RequestActivity::class.java)
             startActivity(intent)
         }
 

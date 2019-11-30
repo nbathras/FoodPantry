@@ -5,7 +5,7 @@ import kotlin.collections.ArrayList
 
 data class Inventory (
     val requestItem: String    = "",
-    val requestQuantity: String   = "",
+    val requestQuantityDesired: String   = "",
     val requestDropOff: String   = ""
 
 )
