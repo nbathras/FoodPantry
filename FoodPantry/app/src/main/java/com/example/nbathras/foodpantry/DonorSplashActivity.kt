@@ -59,6 +59,7 @@ class DonorSplashActivity : AppCompatActivity() {
                 intent.putExtra(DISTRIBUTOR_ABOUT, distributor.distributorAbout)
                 intent.putExtra(USER_ID, userUID)
                 intent.putExtra(DISTRIBUTOR_ID,distributor.distributorId)
+                intent.putStringArrayListExtra(DISTRIBUTOR_ADDRESS, distributor.distributorLocation)
 
                 startActivity(intent)
             }

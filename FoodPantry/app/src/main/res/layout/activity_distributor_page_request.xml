@@ -10,46 +10,95 @@
     <ListView
         android:id="@+id/distributor_request_list"
         android:layout_width="match_parent"
-        android:layout_height="456dp"
+        android:layout_height="399dp"
         android:layout_below="@id/distributor_picture"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginTop="75dp"></ListView>
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="244dp"
+        android:layout_marginBottom="-2dp"
+        android:fastScrollEnabled="true"></ListView>
 
     <ImageView
         android:id="@+id/distributor_picture"
-        android:layout_width="138dp"
-        android:layout_height="142dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="50dp"
-        android:background="#FF1744"></ImageView>
+        android:layout_marginTop="30dp"
+        android:background="@mipmap/ic_launcher_round"
+        app:srcCompat="@color/common_google_signin_btn_text_dark_disabled"></ImageView>
 
     <TextView
         android:id="@+id/distributorName"
-        android:layout_width="194dp"
+        android:layout_width="248dp"
         android:layout_height="wrap_content"
         android:layout_alignRight="@id/distributor_picture"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="35dp"
-        android:text="@string/distributor_name"></TextView>
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="25dp"
+        android:layout_toEndOf="@+id/distributor_picture"
+        android:text="@string/distributor_name"
+        tools:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        tools:textStyle="bold"></TextView>
 
     <TextView
         android:id="@+id/distributorAbout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="368dp"
+        android:layout_height="163dp"
         android:layout_below="@id/distributorName"
         android:layout_alignRight="@id/distributor_picture"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="80dp"
-        android:layout_marginEnd="35dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="120dp"
+        android:layout_marginEnd="23dp"
+        android:layout_marginRight="-308dp"
         android:width="194dp"
         android:height="100dp"
         android:text="@string/distributor_about"
-        tools:layout_marginTop="80dp"></TextView>
+        tools:scrollbars="vertical"></TextView>
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="-1dp"
+        android:layout_marginTop="308dp"
+        android:layout_marginEnd="0dp"
+        android:text="REQUESTS"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        tools:gravity="center"
+        tools:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/distributorLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="62dp"
+        android:layout_marginEnd="25dp"
+        android:layout_toEndOf="@+id/distributor_picture"
+        android:text="Distributor Location"
+        tools:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+
+    <TextView
+        android:id="@+id/distributorAdditionalAddress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="101dp"
+        android:layout_marginTop="86dp"
+        android:layout_marginEnd="26dp" />
 
 </RelativeLayout>

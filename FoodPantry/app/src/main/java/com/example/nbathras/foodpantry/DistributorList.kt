@@ -20,11 +20,13 @@ class DistributorList(val context:Activity, var distributors: List<Distributor>)
 
         val textViewName = listViewItem.findViewById<View>(R.id.distributorName) as TextView
         val textViewAbout = listViewItem.findViewById<View>(R.id.distributorAbout) as TextView
+        val textViewAddress = listViewItem.findViewById<View>(R.id.distributorLocation) as TextView
 
         val distributor = distributors[position]
         //Populating 'name' and 'about' text fields for each list element
         textViewName.text = distributor.distributorName
         textViewAbout.text = distributor.distributorAbout
+        textViewAddress.text = distributor.distributorLocation[0]
 
         return listViewItem
     }

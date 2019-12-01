@@ -15,12 +15,15 @@ import com.google.firebase.database.DatabaseError
 class DistributorPageRequestActivity : AppCompatActivity() {
 
     private lateinit var distributorName: TextView
+    private lateinit var distributorAddress: TextView
+    private lateinit var distributorAdditionalAddress: TextView
     private lateinit var distributorAbout: TextView
     private lateinit var distributorPicture: ImageView
     private lateinit var listViewDistributorRequest: ListView
     private lateinit var distributorRequest: MutableList<Request>
     private lateinit var databaseDistributorRequest: DatabaseReference
     private lateinit var listViewRequestAdapter: DistributorRequestList
+    private lateinit var distributorAddressArraylist: ArrayList<String>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,12 +33,22 @@ class DistributorPageRequestActivity : AppCompatActivity() {
         distributorName = findViewById(R.id.distributorName)
         distributorAbout = findViewById(R.id.distributorAbout)
         distributorPicture = findViewById(R.id.distributor_picture)
+        distributorAddress = findViewById(R.id.distributorLocation)
+        distributorAdditionalAddress = findViewById(R.id.distributorAdditionalAddress)
         listViewDistributorRequest = findViewById<View>(R.id.distributor_request_list) as ListView
+
+        distributorAddressArraylist = intent.getStringArrayListExtra(DISTRIBUTOR_ADDRESS)
 
         //Setting distributor name text field
         distributorName.text = intent.getStringExtra(DISTRIBUTOR_NAME)
         //Setting distributor about text field
         distributorAbout.text = intent.getStringExtra(DISTRIBUTOR_ABOUT)
+        //Setting distributor location text field
+        if(distributorAddressArraylist.size > 1) {
+            distributorAdditionalAddress.text = distributorAddressArraylist[1]
+        }
+        distributorAddress.text = distributorAddressArraylist[0]
+
 
         distributorRequest = ArrayList()
 
@@ -96,6 +109,7 @@ class DistributorPageRequestActivity : AppCompatActivity() {
             const val REQUEST_ID = "requestID"
             const val REQUEST_ITEMS = "requestItems"
             const val REQUEST_DATE = "requestDate"
+            const val DISTRIBUTOR_ADDRESS = "distributorAddress"
     }
 
 }

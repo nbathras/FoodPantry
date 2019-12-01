@@ -16,7 +16,9 @@
         android:text="Donations"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:gravity="center"
+        tools:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
     <ListView
         android:id="@+id/RequestListView"

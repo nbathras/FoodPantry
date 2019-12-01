@@ -15,21 +15,23 @@
         android:layout_alignParentEnd="true"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="31dp"
-        android:layout_marginTop="81dp"
-        android:layout_marginEnd="32dp"
+        android:layout_marginTop="65dp"
+        android:layout_marginEnd="29dp"
         tools:layout_marginEnd="30dp" />
 
     <TextView
         android:id="@+id/requestItemName"
-        android:layout_width="346dp"
-        android:layout_height="38dp"
+        android:layout_width="381dp"
+        android:layout_height="30dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
+        android:layout_centerHorizontal="true"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="30dp"
-        android:text="Request Item Name" />
+        android:layout_marginTop="29dp"
+        android:layout_marginEnd="29dp"
+        android:text="Request Item Name"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
     <TextView
         android:id="@+id/seekBarMin"
@@ -37,8 +39,8 @@
         android:layout_height="25dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="107dp"
+        android:layout_marginStart="34dp"
+        android:layout_marginTop="91dp"
         android:text="0" />
 
     <TextView
@@ -47,8 +49,8 @@
         android:layout_height="25dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="107dp"
-        android:layout_marginEnd="30dp"
+        android:layout_marginTop="91dp"
+        android:layout_marginEnd="33dp"
         android:text="Max" />
 
 </RelativeLayout>
