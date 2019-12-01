@@ -12,12 +12,14 @@
         <activity android:name=".DistributorEditActivity"></activity>
         <activity android:name=".DonorEditActivity" />
         <activity android:name=".DistributorRequestList" />
-        <activity android:name=".InventoryRequestList" />
+        <activity android:name=".RequestList" />
         <activity android:name=".DistributorPageRequestActivity" />
+        <activity android:name=".DonorSubmitRequestActivity" />
         <activity android:name=".DistributorList" />
         <activity android:name=".DistributorSplashActivity" />
         <activity android:name=".DonorSplashActivity" />
-        <activity android:name=".InventoryActivity" />
+        <activity android:name=".AddRequestActivity" />
+        <activity android:name=".AddDistributorRequestActivity" />
         <activity
             android:name=".DistributorRegistrationActivity"
             android:windowSoftInputMode="adjustPan" />

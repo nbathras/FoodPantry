@@ -1,6 +1,8 @@
 package com.example.nbathras.foodpantry
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -12,28 +14,35 @@ import com.google.firebase.database.*
 class DistributorSplashActivity : AppCompatActivity() {
 
     private var mAddRequestButton : Button? = null
-
-    var databaseInventories: DatabaseReference? = null
-    private lateinit var inventories: MutableList<Inventory>
+    private lateinit var sharedPreferences: SharedPreferences
+    var requestsDatabase: DatabaseReference? = null
+    private lateinit var persistedRequests: MutableList<Request>
     private lateinit var listViewInventory: ListView
-    private lateinit var listViewAdapter: ArrayAdapter<Inventory>
+    private lateinit var listViewAdapter: ArrayAdapter<Request>
+    private var shouldDelete: Boolean = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_distributor_splash)
         //getting the reference of artists node
-        databaseInventories = FirebaseDatabase.getInstance().getReference("inventories")
-        inventories = ArrayList()
+        requestsDatabase = FirebaseDatabase.getInstance().getReference("requests")
+
+        sharedPreferences = getSharedPreferences(DonorSplashActivity.MY_PREFERENCE, Context.MODE_PRIVATE)
+        // Clearing all previous requests
+
+
+
+
+        persistedRequests = ArrayList()
 
         //List view defined in layout file
-        listViewInventory = findViewById<View>(R.id.inventory_list) as ListView
+        listViewInventory = findViewById<View>(R.id.request_list) as ListView
 
         //When the user clicks on a specific distributor list item, show their biography/request page
         listViewInventory.onItemClickListener =
             AdapterView.OnItemClickListener { adapterView, view, i, l ->
-                val distributor = inventories[i]
-                val intent = Intent(applicationContext, InventoryRequestList::class.java)
-
+                val distributor = persistedRequests[i]
+                val intent = Intent(applicationContext, RequestList::class.java)
                 startActivity(intent)
             }
         initializeUI()
@@ -47,20 +56,28 @@ class DistributorSplashActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        databaseInventories!!.addValueEventListener(object : ValueEventListener {
+        requestsDatabase!!.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 //clearing the previous distributors list
-                inventories.clear()
+                persistedRequests.clear()
 
                 //populating the distributors array from the database
-                for (postSnapshot2 in dataSnapshot.children) {
-                    val inventory = postSnapshot2.getValue<Inventory>(Inventory::class.java)
+                for (postSnapshot in dataSnapshot.children) {
+
+                    var requestId = postSnapshot.child("requestId").value as String
+                    var userId = postSnapshot.child("userId").value as String
+                    var finisedDate = postSnapshot.child("finishDate").value as String
+                    var itemsList = postSnapshot.child("itemsList").value as  ArrayList<Pair<String, Pair<Int, Int>>>
+                    //  val persistedRequest = postSnapshot.getValue<Request>(Request::class.java)
+
+                    val persistedRequest = Request(userId = userId, requestId = requestId, finishDate = finisedDate, itemsList = itemsList)
                     //add distributor to the list
-                    inventories.add(inventory!!)
+                    persistedRequests.add(persistedRequest!!)
                 }
 
+
                 //Initializing listViewAdapter to customized DistributorList adapter
-                listViewAdapter = InventoryRequestList(this@DistributorSplashActivity, inventories)
+                listViewAdapter = RequestList(this@DistributorSplashActivity, persistedRequests)
                 listViewInventory.adapter = listViewAdapter
             }
 
@@ -75,7 +92,8 @@ class DistributorSplashActivity : AppCompatActivity() {
 
 
         mAddRequestButton!!.setOnClickListener {
-            val intent = Intent(this@DistributorSplashActivity, InventoryActivity::class.java)
+           // val intent = Intent(this@DistributorSplashActivity, DonorSubmitRequestActivity::class.java)
+            val intent = Intent(this@DistributorSplashActivity, AddDistributorRequestActivity::class.java)
             startActivity(intent)
         }
 
@@ -110,17 +128,13 @@ class DistributorSplashActivity : AppCompatActivity() {
 
     companion object {
         private val TAG = "DistributorSplashActivity"
-
         const val MY_PREFERENCE   = "myPreference"
         const val USER_ID         = "userID"
-
         const val DISTRIBUTOR_NAME  = "distributorName"
         const val DISTRIBUTOR_ABOUT = "distributorAbout"
         const val DISTRIBUTOR_ADDRESS = "distributorAddress"
         const val USER_DISTRIBUTOR_PIC   = "userDistributorPic"
         const val DISTRIBUTOR_ID = "distributorID"
-
-
 
     }
 }
