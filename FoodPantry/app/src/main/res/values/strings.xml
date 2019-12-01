@@ -32,9 +32,9 @@
 
 
     <!--Layout Strings -->
-    <string name="inventory_item">Inventory Item</string>
-    <string name="inventory_quantity">Inventory Quantity</string>
-    <string name="inventory_drop_off">Inventory DropOff</string>
+    <string name="request_item">Request Item</string>
+    <string name="inventory_quantity">Request Quantity</string>
+    <string name="inventory_drop_off">Request DropOff</string>
     <string-array name="types">
         <item>Mobile</item>
         <item>Office</item>

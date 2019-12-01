@@ -34,15 +34,17 @@ class LoginActivity : AppCompatActivity() {
         initializeViews()
 
         mLoginButton!!.setOnClickListener {
-            loginUserAccount()
+            val email: String    = mEmailEditText!!.text.toString()
+            val password: String = mPasswordEditText!!.text.toString()
+            loginUserAccount(email,password)
         }
     }
 
-    private fun loginUserAccount() {
+
+    private fun loginUserAccount(email:String, password:String) {
         mProgressBar!!.visibility = View.VISIBLE
 
-        val email: String    = mEmailEditText!!.text.toString()
-        val password: String = mPasswordEditText!!.text.toString()
+
 
         // ToDo: Probably should check if the email entered was valid as well
         if (TextUtils.isEmpty(email)) {
@@ -86,6 +88,10 @@ class LoginActivity : AppCompatActivity() {
                                     editor.putString(USER_LOGIN_TYPE, "donors")
                                     editor.putString(USER_ID, userID)
                                     editor.putString(USER_DONOR_ID, donor?.donorId)
+
+                                    // remove it after testing
+                                    editor.putString(USER_Email, email)
+                                    editor.putString(USER_PASSWORD, password)
                                     editor.apply()
                                     editor.commit()
                                 }
@@ -113,6 +119,8 @@ class LoginActivity : AppCompatActivity() {
                                     editor.putString(USER_LOGIN_TYPE, "distributor")
                                     editor.putString(USER_ID, userID)
                                     editor.putString(USER_DISTRIBUTOR_ID, distributor?.distributorId)
+                                    editor.putString(USER_Email, email)
+                                    editor.putString(USER_PASSWORD, password)
                                     editor.apply()
                                     editor.commit()
                                 }
@@ -139,6 +147,7 @@ class LoginActivity : AppCompatActivity() {
             }
     }
 
+
     private fun initializeViews() {
         mEmailEditText = findViewById(R.id.activityLogin_emailEditText)
         mPasswordEditText = findViewById(R.id.activityLogin_passwordEditText)
@@ -149,10 +158,10 @@ class LoginActivity : AppCompatActivity() {
     companion object {
         private const val TAG          = "FoodPantry"
         private const val ACTIVITY_TAG = "LoginActivity"
-
         const val MY_PREFERENCE = "myPreference"
-
         const val USER_LOGIN_TYPE     = "userLoginType"
+        const val USER_PASSWORD     = "userPassword"
+        const val USER_Email     = "userEmail"
         const val USER_ID             = "userID"
         const val USER_DONOR_ID       = "userDonorID"
         const val USER_DISTRIBUTOR_ID = "userDistributorID"

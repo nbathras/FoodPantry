@@ -97,23 +97,23 @@ class DonorSubmitRequestActivity : AppCompatActivity() {
      */
     fun updateRequestList() {
         //Retrieve request with corresponding requestID
-        var request = (databaseDistributorRequest.child(requestId)) as Request
-        //New request list to be populated with updated values for corresponding request
-        var updatedRequestList: ArrayList<Pair<String, Pair<Int, Int>>> = ArrayList<Pair<String, Pair<Int, Int>>>()
-
-        for((key, valueRequest) in request.itemsList){
-            //Checks if any donations have been made for a particular item in the current request list. If so, update new values in new request list
-            if(donationHashMap.containsKey(key)) {
-                var newNumNeeded = valueRequest.second - donationHashMap.getValue(key)
-                updatedRequestList.add(Pair(key, Pair(0, newNumNeeded)))
-            }
-            //Else, add originally value to updatedRequestList
-            else {
-                updatedRequestList.add(Pair(key, Pair(0, valueRequest.second)))
-            }
-        }
-        var newUpdatedRequest = Request(request.deliveryDate, request.requestId, request.finishDate, updatedRequestList)
-        databaseDistributorRequest.child(requestId).setValue(newUpdatedRequest)
+//        var request = (databaseDistributorRequest.child(requestId)) as Request
+//        //New request list to be populated with updated values for corresponding request
+//        var updatedRequestList: ArrayList<Pair<String, Pair<Int, Int>>> = ArrayList<Pair<String, Pair<Int, Int>>>()
+//
+//        for((key, valueRequest) in request.itemsList){
+//            //Checks if any donations have been made for a particular item in the current request list. If so, update new values in new request list
+//            if(donationHashMap.containsKey(key)) {
+//                var newNumNeeded = valueRequest.second - donationHashMap.getValue(key)
+//                updatedRequestList.add(Pair(key, Pair(0, newNumNeeded)))
+//            }
+//            //Else, add originally value to updatedRequestList
+//            else {
+//                updatedRequestList.add(Pair(key, Pair(0, valueRequest.second)))
+//            }
+//        }
+//        var newUpdatedRequest = Request(request.deliveryDate, request.requestId, request.finishDate, updatedRequestList)
+//        databaseDistributorRequest.child(requestId).setValue(newUpdatedRequest)
     }
 
     }

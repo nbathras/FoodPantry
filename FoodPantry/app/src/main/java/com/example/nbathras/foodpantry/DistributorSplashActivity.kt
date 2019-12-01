@@ -14,8 +14,16 @@ import com.google.firebase.database.*
 class DistributorSplashActivity : AppCompatActivity() {
 
     private var mAddRequestButton : Button? = null
+    private lateinit var mDistributorName: TextView
+    private lateinit var mDistributorAddress: TextView
+    private lateinit var mDistributorAdditionalAddress: TextView
+    private lateinit var mDistributorAbout: TextView
+
     private lateinit var sharedPreferences: SharedPreferences
+    private lateinit var mDistributor: Distributor
+    private lateinit var mDistributorID: String
     var requestsDatabase: DatabaseReference? = null
+    var distributorsDatabase: DatabaseReference? = null
     private lateinit var persistedRequests: MutableList<Request>
     private lateinit var listViewInventory: ListView
     private lateinit var listViewAdapter: ArrayAdapter<Request>
@@ -25,13 +33,18 @@ class DistributorSplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_distributor_splash)
         //getting the reference of artists node
-        requestsDatabase = FirebaseDatabase.getInstance().getReference("requests")
 
-        sharedPreferences = getSharedPreferences(DonorSplashActivity.MY_PREFERENCE, Context.MODE_PRIVATE)
-        // Clearing all previous requests
+        distributorsDatabase = FirebaseDatabase.getInstance().getReference("distributors")
 
 
+        sharedPreferences = getSharedPreferences(DistributorSplashActivity.MY_PREFERENCE, Context.MODE_PRIVATE)
+        if(sharedPreferences != null) {
+            mDistributorID = sharedPreferences.getString(LoginActivity.USER_DISTRIBUTOR_ID,"").toString()
 
+            if(mDistributorID != null) {
+                requestsDatabase = FirebaseDatabase.getInstance().getReference("requests").child(mDistributorID)
+            }
+        }
 
         persistedRequests = ArrayList()
 
@@ -56,6 +69,46 @@ class DistributorSplashActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
+
+        distributorsDatabase!!.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                //clearing the previous distributors list
+                persistedRequests.clear()
+
+                //populating the distributors array from the database
+                for (distributorSnapshot in dataSnapshot.children) {
+
+                    for(distributor in distributorSnapshot.children) {
+
+                        if(distributor.key == mDistributorID) {
+                            val name = distributor.child("distributorName").getValue() as String
+                            val about = distributor.child("distributorAbout").getValue() as String
+                            val location = distributor.child("distributorLocation").getValue() as ArrayList<String>
+
+                            mDistributor = Distributor(distributorAbout = about, distributorName = name, distributorLocation = location)
+
+                        }
+                    }
+
+
+                }
+
+
+                //Initializing listViewAdapter to customized DistributorRequestList adapter
+                listViewAdapter = RequestList(this@DistributorSplashActivity, persistedRequests)
+                listViewInventory.adapter = listViewAdapter
+
+                if(mDistributor != null) {
+                    mDistributorName.text = mDistributor.distributorName
+                    mDistributorAbout.text = mDistributor.distributorAbout
+                    mDistributorAdditionalAddress.text = mDistributor.distributorLocation.toString()
+                }
+            }
+
+            override fun onCancelled(p0: DatabaseError) {
+                //Empty
+            }
+        })
         requestsDatabase!!.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 //clearing the previous distributors list
@@ -64,14 +117,7 @@ class DistributorSplashActivity : AppCompatActivity() {
                 //populating the distributors array from the database
                 for (postSnapshot in dataSnapshot.children) {
 
-                    var requestId = postSnapshot.child("requestId").value as String
-                    var userId = postSnapshot.child("userId").value as String
-                    var finisedDate = postSnapshot.child("finishDate").value as String
-                    var itemsList = postSnapshot.child("itemsList").value as  ArrayList<Pair<String, Pair<Int, Int>>>
-                    //  val persistedRequest = postSnapshot.getValue<Request>(Request::class.java)
-
-                    val persistedRequest = Request(userId = userId, requestId = requestId, finishDate = finisedDate, itemsList = itemsList)
-                    //add distributor to the list
+                    val persistedRequest = postSnapshot.getValue<Request>(Request::class.java)
                     persistedRequests.add(persistedRequest!!)
                 }
 
@@ -107,13 +153,11 @@ class DistributorSplashActivity : AppCompatActivity() {
             val intent = Intent(this, MainActivity::class.java)
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
             startActivity(intent);
-
             return true
         }
         if (item.itemId == R.id.loggedInMenu_editProfileItem) {
             val intent = Intent(this, DistributorEditActivity::class.java)
             startActivity(intent)
-
             return true
         }
 
@@ -123,6 +167,9 @@ class DistributorSplashActivity : AppCompatActivity() {
 
     private fun initializeUI() {
         mAddRequestButton = findViewById(R.id.activityDistributorSplash_addRequestButton)
+        mDistributorName = findViewById(R.id.distributorNameLable)
+        mDistributorAbout = findViewById(R.id.distributorAboutLable)
+        mDistributorAdditionalAddress = findViewById(R.id.distributorLocationLable)
 
     }
 

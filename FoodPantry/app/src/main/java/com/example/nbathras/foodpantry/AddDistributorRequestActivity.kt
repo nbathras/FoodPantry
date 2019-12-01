@@ -19,13 +19,15 @@ class AddDistributorRequestActivity : AppCompatActivity() {
     private var parentLinearLayout: LinearLayout? = null
 
     private lateinit var sharedPreferences: SharedPreferences
+    private lateinit var mDistributorID: String
     private lateinit var mAddRequestButton : Button
     private lateinit var mItemFinishDate : EditText
     private lateinit var mItemName : EditText
     private lateinit var mItemCurrentQuantity : EditText
     private lateinit var mItemMaxQuantity : EditText
     private lateinit var databaseDistributorRequest: DatabaseReference
-    private lateinit var  itemsList : ArrayList<Pair<String, Pair<Int, Int>>>
+    private lateinit var  itemsList : ArrayList<HashMap<String,Any>>
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,18 +36,21 @@ class AddDistributorRequestActivity : AppCompatActivity() {
         initializeUI()
         mAddRequestButton.setOnClickListener {
 
-            // Create the Rquest Object
+
+
+
+            // Create the Request Object
             var itemFinishDate = mItemFinishDate.text.toString()
 
             // adding request to database with items and new request id
-            val requestId  = databaseDistributorRequest.child("10/10/2010").push().key
+            val requestId  = databaseDistributorRequest.push().key
 
             if (requestId != null) {
-                sharedPreferences = getSharedPreferences(DonorSplashActivity.MY_PREFERENCE, Context.MODE_PRIVATE)
-                //Obtaining specific userID through sharedPreferences
-                var userUID = sharedPreferences.getString(DonorSplashActivity.USER_ID, "Null").toString()
-                val request = Request("",requestId,itemFinishDate,itemsList, userUID)
+
+                val request = Request("",requestId,itemFinishDate,itemsList, mDistributorID)
+                // Binds user ID with request ID
                 databaseDistributorRequest.child(requestId).setValue(request)
+               // databaseDistributorRequest.child(requestId).setValue(request)
             }
 
             // Navigate back to DistributorSplashActivity
@@ -53,10 +58,18 @@ class AddDistributorRequestActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        itemsList = ArrayList()
+        //Initializes items list to store request names and quantities
+        itemsList =  ArrayList<HashMap<String,Any>>()
         parentLinearLayout = findViewById(R.id.parent_linear_layout) as LinearLayout
+        sharedPreferences = getSharedPreferences(DistributorSplashActivity.MY_PREFERENCE, Context.MODE_PRIVATE)
 
-        databaseDistributorRequest = FirebaseDatabase.getInstance().getReference("requests")
+        if(sharedPreferences != null) {
+            //Gets distributor ID
+            mDistributorID = sharedPreferences.getString(LoginActivity.USER_DISTRIBUTOR_ID,"").toString()
+            //Gets path with user ID
+            databaseDistributorRequest = FirebaseDatabase.getInstance().getReference("requests").child(mDistributorID)
+        }
+
     }
 
     override fun onStart() {
@@ -78,8 +91,12 @@ class AddDistributorRequestActivity : AppCompatActivity() {
         val itemCurrnetQuantity =  mItemCurrentQuantity.getText().toString().toInt()
         val itemMaxQuantity =  mItemMaxQuantity.getText().toString().toInt()
 
-        val quantity = Pair(itemCurrnetQuantity,itemMaxQuantity);
-        itemsList.add(Pair(itemName, quantity))
+        var item = HashMap<String,Any>()
+        item.put(Request.ITEM_NAME,itemName)
+        item.put(Request.ITEM_CURRENT_QUANTITY,itemCurrnetQuantity)
+        item.put(Request.ITEM_MAX_QUANTITY,itemMaxQuantity)
+
+        itemsList.add(item)
 
 
         val inflater =

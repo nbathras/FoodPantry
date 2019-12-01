@@ -8,22 +8,30 @@
 
     <TextView
         android:id="@+id/requestItemName"
-        android:layout_width="183dp"
-        android:layout_height="36dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
         android:layout_marginTop="30dp"
         android:paddingBottom="10dp"
-        android:text="@string/inventory_item"
+        android:text="@string/request_item"
+        android:textAppearance="@android:style/TextAppearance.Material.Medium" />
+
+    <TextView
+        android:id="@+id/requestIdAndUserId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/requestItemName"
+        android:layout_marginLeft="15dp"
+        android:paddingBottom="10dp"
+        android:text="@string/request_item"
         android:textAppearance="@android:style/TextAppearance.Material.Medium" />
 
     <TextView
         android:id="@+id/requestFinishDate"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/requestItemName"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="16dp"
+        android:layout_below="@id/requestIdAndUserId"
+        android:layout_marginLeft="15dp"
         android:text="@string/inventory_quantity" />
 
 

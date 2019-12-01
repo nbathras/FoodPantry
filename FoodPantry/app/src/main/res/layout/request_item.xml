@@ -3,29 +3,30 @@
     android:layout_width="match_parent"
     android:layout_height="50dp"
     android:orientation="horizontal" >
+
     <EditText
         android:id="@+id/item_name"
-        android:layout_width="0dp"
+        android:layout_width="135dp"
         android:layout_height="match_parent"
         android:layout_weight="5"
         android:hint="Item name"
-        android:inputType="text"/>
+        android:inputType="text" />
 
     <EditText
         android:id="@+id/item_current"
-        android:layout_width="0dp"
+        android:layout_width="12dp"
         android:layout_height="match_parent"
         android:layout_weight="5"
         android:hint="Current Quantity"
-        android:inputType="number"/>
+        android:inputType="number" />
 
     <EditText
         android:id="@+id/item_max"
-        android:layout_width="0dp"
+        android:layout_width="10dp"
         android:layout_height="match_parent"
         android:layout_weight="5"
         android:hint="Max Quantity"
-        android:inputType="number"/>
+        android:inputType="number" />
     <Button
         android:id="@+id/delete_button"
         android:layout_width="0dp"

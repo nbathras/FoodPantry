@@ -20,7 +20,7 @@
         tools:layout_marginEnd="30dp" />
 
     <TextView
-        android:id="@+id/requestItemName"
+        android:id="@+id/requestItemFullName"
         android:layout_width="381dp"
         android:layout_height="30dp"
         android:layout_alignParentStart="true"
