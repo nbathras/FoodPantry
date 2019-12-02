@@ -8,13 +8,15 @@
 
     <TextView
         android:id="@+id/requestMinQuantity"
-        android:layout_width="298dp"
-        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_height="29dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="29dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="83dp"
-        android:text="TextView" />
+        android:textStyle="bold"
+        tools:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        tools:textStyle="bold" />
 </RelativeLayout>

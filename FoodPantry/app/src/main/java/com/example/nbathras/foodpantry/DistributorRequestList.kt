@@ -1,6 +1,7 @@
 package com.example.nbathras.foodpantry
 
 import android.app.Activity
+import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
@@ -19,6 +20,8 @@ class DistributorRequestList(private val context:Activity, var requests: List<Re
 
         val request = requests[position]
         requestFinishDateText.text = request.finishDate.toString()
+        requestFinishDateText.textSize = 20.0f
+        requestFinishDateText.gravity = Gravity.CENTER
 
         return listViewItem
     }

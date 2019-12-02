@@ -46,8 +46,10 @@ class DistributorPageRequestActivity : AppCompatActivity() {
         //Setting distributor location text field
         if(distributorAddressArraylist.size > 1) {
             distributorAdditionalAddress.text = distributorAddressArraylist[1]
+            distributorAdditionalAddress.textSize = 17.0f
         }
         distributorAddress.text = distributorAddressArraylist[0]
+        distributorAddress.textSize = 17.0f
 
 
         distributorRequest = ArrayList()
@@ -64,11 +66,12 @@ class DistributorPageRequestActivity : AppCompatActivity() {
             AdapterView.OnItemClickListener { adapterView, view, i, l ->
 
                 val request = distributorRequest[i]
-                val intent = Intent(applicationContext,DonationToDistributorListItem::class.java)
+                val intent = Intent(applicationContext,DonorSubmitRequestActivity::class.java)
                 intent.putExtra(DISTRIBUTOR_ID, distributorID)
                 intent.putExtra(REQUEST_ID, request.requestId)
                 intent.putExtra(REQUEST_ITEMS, request.itemsList)
                 intent.putExtra(REQUEST_DATE, request.finishDate)
+                intent.putExtra(USER_ID,userID)
                 startActivity(intent)
             }
     }

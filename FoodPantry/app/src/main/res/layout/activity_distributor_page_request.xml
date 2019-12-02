@@ -42,7 +42,9 @@
         android:layout_marginEnd="25dp"
         android:layout_toEndOf="@+id/distributor_picture"
         android:text="@string/distributor_name"
-        tools:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textStyle="bold"
+        tools:textAppearance="@style/TextAppearance.AppCompat.Large"
         tools:textStyle="bold"></TextView>
 
     <TextView
@@ -72,8 +74,10 @@
         android:layout_marginStart="-1dp"
         android:layout_marginTop="308dp"
         android:layout_marginEnd="0dp"
+        android:gravity="center"
         android:text="REQUESTS"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textStyle="bold"
         tools:gravity="center"
         tools:textStyle="bold" />
 
@@ -88,6 +92,7 @@
         android:layout_marginEnd="25dp"
         android:layout_toEndOf="@+id/distributor_picture"
         android:text="Distributor Location"
+        android:textStyle="bold"
         tools:textAppearance="@style/TextAppearance.AppCompat.Body2" />
 
     <TextView
@@ -99,6 +104,7 @@
         android:layout_alignParentEnd="true"
         android:layout_marginStart="101dp"
         android:layout_marginTop="86dp"
-        android:layout_marginEnd="26dp" />
+        android:layout_marginEnd="26dp"
+        android:textStyle="bold" />
 
 </RelativeLayout>
