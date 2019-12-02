@@ -35,7 +35,8 @@ class DonationToDistributorListItem(private val context: Activity, var itemsList
         seekBarMinimum.text = "0"
         seekBarMax.text = request.get(Request.ITEM_MAX_QUANTITY).toString()
 
-        seekBar.max = request.get(Request.ITEM_MAX_QUANTITY).toString().toInt()
+        seekBar.max = request.get(Request.ITEM_MAX_QUANTITY).toString().toInt() -
+                request.get(Request.ITEM_CURRENT_QUANTITY).toString().toInt()
         seekBar.min = 0
         seekBar.setClickable(false)
         seekBar.setFocusable(false)
