@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 
@@ -15,8 +16,7 @@ import com.google.firebase.database.DatabaseError
 class DistributorPageRequestActivity : AppCompatActivity() {
 
     private lateinit var distributorName: TextView
-    private lateinit var distributorAddress: TextView
-    private lateinit var distributorAdditionalAddress: TextView
+    private lateinit var distributorAddressLayout: LinearLayout
     private lateinit var distributorAbout: TextView
     private lateinit var distributorPicture: ImageView
     private lateinit var listViewDistributorRequest: ListView
@@ -33,8 +33,7 @@ class DistributorPageRequestActivity : AppCompatActivity() {
         distributorName = findViewById(R.id.distributorName)
         distributorAbout = findViewById(R.id.distributorAbout)
         distributorPicture = findViewById(R.id.distributor_picture)
-        distributorAddress = findViewById(R.id.distributorLocation)
-        distributorAdditionalAddress = findViewById(R.id.distributorAdditionalAddress)
+        distributorAddressLayout = findViewById(R.id.addressLayout)
         listViewDistributorRequest = findViewById<View>(R.id.distributor_request_list) as ListView
 
         distributorAddressArraylist = intent.getStringArrayListExtra(DISTRIBUTOR_ADDRESS)
@@ -44,13 +43,16 @@ class DistributorPageRequestActivity : AppCompatActivity() {
         //Setting distributor about text field
         distributorAbout.text = intent.getStringExtra(DISTRIBUTOR_ABOUT)
         //Setting distributor location text field
-        if(distributorAddressArraylist.size > 1) {
-            distributorAdditionalAddress.text = distributorAddressArraylist[1]
-            distributorAdditionalAddress.textSize = 17.0f
+        var count = 1
+        for (address : String in distributorAddressArraylist) {
+            val text_view = TextView(this)
+            text_view.layoutParams = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT)
+            text_view.setText(count.toString() + ". " + address)
+            distributorAddressLayout.addView(text_view)
+            count += 1
         }
-        distributorAddress.text = distributorAddressArraylist[0]
-        distributorAddress.textSize = 17.0f
-
 
         distributorRequest = ArrayList()
 
