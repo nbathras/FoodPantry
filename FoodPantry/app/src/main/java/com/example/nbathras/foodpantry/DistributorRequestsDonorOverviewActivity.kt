@@ -35,7 +35,7 @@ class DistributorRequestsDonorOverviewActivity : AppCompatActivity() {
     private lateinit var listViewAdapter: ArrayAdapter<Donation>
     private var mAddRequestButton : Button? = null
     private lateinit var mDistributorName: TextView
-    private lateinit var mDistributorAdditionalAddress: TextView
+    // private lateinit var mDistributorAdditionalAddress: TextView
     private lateinit var mDistributorAbout: TextView
     private lateinit var mDistributor: Distributor
     var requestsDatabase: DatabaseReference? = null
@@ -146,8 +146,7 @@ class DistributorRequestsDonorOverviewActivity : AppCompatActivity() {
         mAddRequestButton = findViewById(R.id.activityDistributorSplash_addRequestButton)
         mDistributorName = findViewById(R.id.distributorNameLable)
         mDistributorAbout = findViewById(R.id.distributorAboutLable)
-        mDistributorAdditionalAddress = findViewById(R.id.distributorLocationLable)
-
+       //  mDistributorAdditionalAddress = findViewById(R.id.distributorLocationLable)
     }
 
     companion object {

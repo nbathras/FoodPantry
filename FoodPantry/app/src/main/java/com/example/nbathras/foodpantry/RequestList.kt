@@ -1,6 +1,7 @@
 package com.example.nbathras.foodpantry
 
 import android.app.Activity
+import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
@@ -31,6 +32,16 @@ class RequestList(val context:Activity, var requests: List<Request>):
         textViewRequestItemNameV.setText(itemDescription)
        // requestIdAndUserIdV.text = "Request ID: " + request.requestId +  "\n"  +" User ID: " + request.userId
        // requestFinishDate.text = "Finish Date: " +request.finishDate
+
+//        val inflater = context.layoutInflater
+//        val listViewItem = inflater.inflate(R.layout.activity_distributor_request_list, null, true)
+//
+//        val requestFinishDateText = listViewItem.findViewById<TextView>(R.id.requestMinQuantity)
+//
+//        val request = requests[position]
+//        requestFinishDateText.text = request.finishDate.toString()
+//        requestFinishDateText.textSize = 20.0f
+//        requestFinishDateText.gravity = Gravity.CENTER
 
         return listViewItem
     }
