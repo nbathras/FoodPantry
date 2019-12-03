@@ -47,14 +47,15 @@ class DistributorSplashActivity : AppCompatActivity() {
 
         persistedRequests = ArrayList()
 
-        //List view defined in layout file
-//        listViewInventory = findViewById<View>(R.id.request_list) as ListView
-
         //When the user clicks on a specific distributor list item, show their biography/request page
         listViewInventory.onItemClickListener =
             AdapterView.OnItemClickListener { adapterView, view, i, l ->
-                val distributor = persistedRequests[i]
-                val intent = Intent(applicationContext, RequestList::class.java)
+                val request = persistedRequests[i]
+                val intent = Intent(applicationContext, DistributorRequestsDonorOverviewActivity::class.java)
+                intent.putExtra(DISTRIBUTOR_ID, mDistributorID)
+                intent.putExtra(REQUEST_DATE, request.finishDate)
+                intent.putExtra(REQUEST_ID, request.requestId)
+                intent.putExtra(REQUEST_ITEMS, request.itemsList)
                 startActivity(intent)
             }
         initializeUI()
@@ -182,6 +183,9 @@ class DistributorSplashActivity : AppCompatActivity() {
         const val DISTRIBUTOR_ADDRESS = "distributorAddress"
         const val USER_DISTRIBUTOR_PIC   = "userDistributorPic"
         const val DISTRIBUTOR_ID = "distributorID"
+        const val REQUEST_DATE = "requestDate"
+        const val REQUEST_ID = "requestId"
+        const val REQUEST_ITEMS = "requestItems"
 
     }
 }
