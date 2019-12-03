@@ -1,110 +1,136 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_margin="4dp"
     tools:context=".DistributorPageRequestActivity">
 
-
-    <ListView
-        android:id="@+id/distributor_request_list"
-        android:layout_width="match_parent"
-        android:layout_height="399dp"
-        android:layout_below="@id/distributor_picture"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="244dp"
-        android:layout_marginBottom="-2dp"
-        android:fastScrollEnabled="true"></ListView>
-
-    <ImageView
-        android:id="@+id/distributor_picture"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="30dp"
-        android:background="@mipmap/ic_launcher_round"
-        app:srcCompat="@color/common_google_signin_btn_text_dark_disabled"></ImageView>
-
-    <TextView
-        android:id="@+id/distributorName"
-        android:layout_width="248dp"
-        android:layout_height="wrap_content"
-        android:layout_alignRight="@id/distributor_picture"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="25dp"
-        android:layout_toEndOf="@+id/distributor_picture"
-        android:text="@string/distributor_name"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textStyle="bold"
-        tools:textAppearance="@style/TextAppearance.AppCompat.Large"
-        tools:textStyle="bold"></TextView>
-
-    <TextView
-        android:id="@+id/distributorAbout"
-        android:layout_width="368dp"
-        android:layout_height="163dp"
-        android:layout_below="@id/distributorName"
-        android:layout_alignRight="@id/distributor_picture"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="120dp"
-        android:layout_marginEnd="23dp"
-        android:layout_marginRight="-308dp"
-        android:width="194dp"
-        android:height="100dp"
-        android:text="@string/distributor_about"
-        tools:scrollbars="vertical"></TextView>
-
-    <TextView
-        android:id="@+id/textView"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="-1dp"
-        android:layout_marginTop="308dp"
-        android:layout_marginEnd="0dp"
-        android:gravity="center"
-        android:text="REQUESTS"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textStyle="bold"
-        tools:gravity="center"
-        tools:textStyle="bold" />
+        android:layout_weight="1"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/distributorLocation"
-        android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:id="@+id/distributor_picture"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:background="@mipmap/ic_launcher_round"
+                app:srcCompat="@color/common_google_signin_btn_text_dark_disabled" />
+
+            <TextView
+                android:id="@+id/distributorName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:text="@string/distributor_name"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textStyle="bold"
+                android:layout_gravity="center"/>
+
+        </LinearLayout>
+
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="4dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:textSize="18dp"
+                    android:text="About:" />
+
+                <TextView
+                    android:id="@+id/distributorAbout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="64dp"
+                    android:text="@string/distributor_about"
+                    tools:scrollbars="vertical" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:textStyle="bold"
+                    android:textSize="18dp"
+                    android:text="Location:"/>
+
+                <LinearLayout
+                    android:id="@+id/addressLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginBottom="8dp">
+
+                    <!-- All of the address will be put here -->
+                    <!-- This is a test location to get formatting correct -->
+                    <!--
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="1." />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="10679 Quarterstaff Road Columbia MD"
+                            android:maxLines="1"
+                            android:ellipsize="end"/>
+                    </LinearLayout> -->
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </ScrollView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="62dp"
-        android:layout_marginEnd="25dp"
-        android:layout_toEndOf="@+id/distributor_picture"
-        android:text="Distributor Location"
-        android:textStyle="bold"
-        tools:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+        android:orientation="vertical"
+        android:layout_marginTop="8dp">
 
-    <TextView
-        android:id="@+id/distributorAdditionalAddress"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="101dp"
-        android:layout_marginTop="86dp"
-        android:layout_marginEnd="26dp"
-        android:textStyle="bold" />
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="REQUESTS:"
+            android:gravity="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textStyle="bold" />
 
-</RelativeLayout>
+        <ListView
+            android:id="@+id/distributor_request_list"
+            android:layout_width="match_parent"
+            android:layout_height="128dp"
+            android:layout_below="@id/distributor_picture"
+            android:fastScrollEnabled="true" />
+
+    </LinearLayout>
+
+</LinearLayout>

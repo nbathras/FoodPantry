@@ -42,6 +42,17 @@ class DistributorEditActivity : AppCompatActivity() {
         mSaveButton.setOnClickListener {
             saveExistingUser()
         }
+
+        mAddAddressButton.setOnClickListener {
+            numAddressEditText += 1
+
+            val edit_text = EditText(this)
+            edit_text.layoutParams = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT)
+            edit_text.hint = getString(R.string.address_edit_text_hint) + " " + numAddressEditText.toString()
+            mAdditionAddressLinearLayout.addView(edit_text)
+        }
     }
 
     private fun saveExistingUser() {
@@ -84,7 +95,7 @@ class DistributorEditActivity : AppCompatActivity() {
 
         Toast.makeText(
             applicationContext,
-            "Registration successful!",
+            "Changes Saved!",
             Toast.LENGTH_LONG
         ).show()
         mProgressBar.visibility = View.GONE

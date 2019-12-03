@@ -2,21 +2,31 @@ package com.example.nbathras.foodpantry
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.Paint
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 
 import com.google.firebase.database.*
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
+import androidx.core.app.ComponentActivity
+import androidx.core.app.ComponentActivity.ExtraData
+import androidx.core.content.ContextCompat.getSystemService
+import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+import android.net.Uri
+import kotlinx.android.synthetic.main.activity_distributor_page_request.*
+import org.w3c.dom.Text
+
 
 class DistributorPageRequestActivity : AppCompatActivity() {
 
     private lateinit var distributorName: TextView
-    private lateinit var distributorAddress: TextView
-    private lateinit var distributorAdditionalAddress: TextView
+    private lateinit var distributorAddressLayout: LinearLayout
     private lateinit var distributorAbout: TextView
     private lateinit var distributorPicture: ImageView
     private lateinit var listViewDistributorRequest: ListView
@@ -33,8 +43,7 @@ class DistributorPageRequestActivity : AppCompatActivity() {
         distributorName = findViewById(R.id.distributorName)
         distributorAbout = findViewById(R.id.distributorAbout)
         distributorPicture = findViewById(R.id.distributor_picture)
-        distributorAddress = findViewById(R.id.distributorLocation)
-        distributorAdditionalAddress = findViewById(R.id.distributorAdditionalAddress)
+        distributorAddressLayout = findViewById(R.id.addressLayout)
         listViewDistributorRequest = findViewById<View>(R.id.distributor_request_list) as ListView
 
         distributorAddressArraylist = intent.getStringArrayListExtra(DISTRIBUTOR_ADDRESS)
@@ -44,13 +53,45 @@ class DistributorPageRequestActivity : AppCompatActivity() {
         //Setting distributor about text field
         distributorAbout.text = intent.getStringExtra(DISTRIBUTOR_ABOUT)
         //Setting distributor location text field
-        if(distributorAddressArraylist.size > 1) {
-            distributorAdditionalAddress.text = distributorAddressArraylist[1]
-            distributorAdditionalAddress.textSize = 17.0f
-        }
-        distributorAddress.text = distributorAddressArraylist[0]
-        distributorAddress.textSize = 17.0f
+        var count = 1
+        for (address : String in distributorAddressArraylist) {
+            // creates linear layout
+            val linearLayout = LinearLayout(this)
+            linearLayout.layoutParams = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
+            )
+            linearLayout.orientation = LinearLayout.HORIZONTAL
 
+            // creates text view containing the counter
+            val text_view_count = TextView(this)
+            text_view_count.layoutParams = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
+            )
+            text_view_count.setText(count.toString() + ". ")
+
+            // creatse text view containing the adress
+            val text_view_address = TextView(this)
+            text_view_address.layoutParams = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
+            )
+            text_view_address.setText(address)
+            text_view_address.setOnClickListener {
+                onClickTextView(text_view_address)
+            }
+            text_view_address.setTextColor(Color.parseColor("#0000EE"))
+            text_view_address.paintFlags = Paint.UNDERLINE_TEXT_FLAG
+
+            // adds all of the views together
+            linearLayout.addView(text_view_count)
+            linearLayout.addView(text_view_address)
+            distributorAddressLayout.addView(linearLayout)
+
+            // increases address count
+            count += 1
+        }
 
         distributorRequest = ArrayList()
 
@@ -103,7 +144,23 @@ class DistributorPageRequestActivity : AppCompatActivity() {
         })
     }
 
-        companion object {
+    private fun onClickTextView(v : TextView) {
+        // Create a Uri from an intent string. Use the result to create an Intent.
+        // val gmmIntentUri = Uri.parse("google.streetview:cbll=46.414382,10.013988")
+        val text_view = v as TextView
+        val address = text_view.text.toString()
+        val gmmIntentUri = Uri.parse("geo:0,0?q=" + address)
+
+        // Create an Intent from gmmIntentUri. Set the action to ACTION_VIEW
+        val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
+        // Make the Intent explicit by setting the Google Maps package
+        mapIntent.setPackage("com.google.android.apps.maps")
+
+        // Attempt to start an activity that can handle the Intent
+        startActivity(mapIntent)
+    }
+
+    companion object {
         const val USER_ID         = "userID"
         const val DISTRIBUTOR_NAME  = "distributorName"
         const val DISTRIBUTOR_ABOUT = "distributorAbout"

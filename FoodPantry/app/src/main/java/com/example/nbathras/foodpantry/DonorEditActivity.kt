@@ -68,7 +68,7 @@ class DonorEditActivity : AppCompatActivity() {
         // Displays successful registration toast
         Toast.makeText(
             applicationContext,
-            "Registration successful!",
+            "Changes Saved!",
             Toast.LENGTH_LONG
         ).show()
         mProgressBar.visibility = View.GONE
