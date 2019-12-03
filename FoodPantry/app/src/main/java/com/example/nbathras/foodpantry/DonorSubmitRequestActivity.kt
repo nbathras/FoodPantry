@@ -15,18 +15,17 @@ import java.util.*
 import kotlin.collections.HashMap
 import java.text.SimpleDateFormat
 import android.widget.Toast
-
+import java.time.LocalDate
 
 
 class DonorSubmitRequestActivity : AppCompatActivity() {
 
-    private lateinit var distributorName: TextView
+    private lateinit var fulfillmentDateText: TextView
     private lateinit var donationToDistributorListView: ListView
     private lateinit var requestItemsList: ArrayList<HashMap<String,Any>>
     private lateinit var donationToDistributorListAdapter: DonationToDistributorListItem
     private lateinit var submitButton: Button
     private lateinit var addDeliveryDateButton: Button
-    private lateinit var donationDateTitle: TextView
     private lateinit var seekBarValueMap: HashMap<String, Int>
     private lateinit var databaseDonations: DatabaseReference
     private lateinit var databaseDistributorRequest: DatabaseReference
@@ -35,6 +34,8 @@ class DonorSubmitRequestActivity : AppCompatActivity() {
     private lateinit var finishDate:String
     private lateinit var requestId: String
     private lateinit var distributorId: String
+    private lateinit var deliveryDateChanged: TextView
+    private lateinit var requestDate: String
     private  var donationList: ArrayList<Pair<String, Int>> = ArrayList<Pair<String, Int>>()
     private  var donationHashMap: HashMap<String, Int> = HashMap<String, Int>()
     private var currentRequest: Request = Request()
@@ -53,6 +54,7 @@ class DonorSubmitRequestActivity : AppCompatActivity() {
         requestId = intent.getStringExtra(DistributorPageRequestActivity.REQUEST_ID)
         distributorId = intent.getStringExtra(DistributorPageRequestActivity.DISTRIBUTOR_ID)
         intent.getStringExtra(DistributorPageRequestActivity.REQUEST_ITEMS)
+        requestDate = intent.getStringExtra(DistributorPageRequestActivity.REQUEST_DATE)
 
         databaseDonations = FirebaseDatabase.getInstance().getReference("donations").child(userID)
         databaseDistributorRequest = FirebaseDatabase.getInstance().getReference("requests").
@@ -60,15 +62,17 @@ class DonorSubmitRequestActivity : AppCompatActivity() {
 
         databaseCorrespondingRequest = databaseDistributorRequest.child(requestId)
 
-        distributorName = findViewById(R.id.DonationLabelTextView)
+        fulfillmentDateText = findViewById(R.id.fulfillmentDate)
         donationToDistributorListView = findViewById(R.id.RequestListView)
         submitButton = findViewById(R.id.SubmitButton)
         addDeliveryDateButton = findViewById(R.id.addDeliveryDateButton)
+        deliveryDateChanged = findViewById(R.id.deliveryDateChange)
         requestItemsList = intent.getSerializableExtra(DistributorPageRequestActivity.REQUEST_ITEMS)
                 as  ArrayList<HashMap<String,Any>>
 
-        donationDateTitle = findViewById(R.id.DonationLabelTextView)
-        donationDateTitle.text = intent.getStringExtra(DistributorPageRequestActivity.REQUEST_DATE)
+
+        fulfillmentDateText.text = requestDate
+
 
         val dateSetListener = object: DatePickerDialog.OnDateSetListener {
             override fun onDateSet(p0: DatePicker?, year: Int, month: Int, day: Int) {
@@ -78,6 +82,7 @@ class DonorSubmitRequestActivity : AppCompatActivity() {
                 val myFormat = "MM/dd/yyyy" // mention the format you need
                 val simpleDateFormat = SimpleDateFormat(myFormat, Locale.US)
                 deliveryDate = simpleDateFormat.format(cal.getTime())
+                deliveryDateChanged.text = deliveryDate
             }
         }
 
@@ -102,6 +107,8 @@ class DonorSubmitRequestActivity : AppCompatActivity() {
                  donationToDistributorListView.adapter = donationToDistributorListAdapter
                 seekBarValueMap = donationToDistributorListAdapter.seekBarValues
 
+                SimpleDateFormat("dd-MM-yyyy").parse(deliveryDate)
+
                 submitButton.setOnClickListener {
                     //submit donation from seek bar values
                     if(deliveryDate != "00/00/0000") {
@@ -111,11 +118,18 @@ class DonorSubmitRequestActivity : AppCompatActivity() {
 
                         var newIntent =  Intent(applicationContext, DonorSplashActivity::class.java)
                         startActivity(newIntent)
+                    } else if((SimpleDateFormat("dd-MM-yyyy").parse(deliveryDate)).after
+                            ((SimpleDateFormat("dd-MM-yyyy").parse(requestDate)))){
+                            Toast.makeText(
+                                this@DonorSubmitRequestActivity,
+                                "Please select a delivery date that is before the fulfillment date.",
+                                Toast.LENGTH_LONG).show()
+
                     } else {
                         Toast.makeText(
                             this@DonorSubmitRequestActivity,
                             "Please select a delivery date before submitting.",
-                            Toast.LENGTH_LONG)
+                            Toast.LENGTH_LONG).show()
                     }
 
                 }
@@ -143,8 +157,8 @@ class DonorSubmitRequestActivity : AppCompatActivity() {
 
         databaseDonations.child(requestId).setValue(donation)
 
-        Toast.makeText(this, "You have successfully submitted a donation!" +
-                "Please arrive on the scheduled day.", Toast.LENGTH_LONG).show()
+        Toast.makeText(this, "You have successfully submitted a donation! Donation quantities are final and cannot be changed"
+            , Toast.LENGTH_LONG).show()
     }
 
     /**This function will be called in order to update the Request item values once a donation has been submitted

@@ -103,6 +103,12 @@ class DistributorPageRequestActivity : AppCompatActivity() {
         val distributorName = intent.getStringExtra(DISTRIBUTOR_NAME)
 
 
+        //Setting Distributor Profile Picture
+        val imageIndex = intent.getIntExtra(IMAGE_INDEX, 0)
+        val imageArray = arrayOf(R.drawable.profilepicture1, R.drawable.profilepic2, R.drawable.profilepic3)
+        distributorPicture.setImageResource(imageArray[imageIndex])
+
+
         listViewDistributorRequest.onItemClickListener =
             AdapterView.OnItemClickListener { adapterView, view, i, l ->
 
@@ -165,11 +171,13 @@ class DistributorPageRequestActivity : AppCompatActivity() {
         const val DISTRIBUTOR_NAME  = "distributorName"
         const val DISTRIBUTOR_ABOUT = "distributorAbout"
         const val DISTRIBUTOR_ID = "distributorID"
+        const val REQUEST_ID = "requestID"
+        const val REQUEST_ITEMS = "requestItems"
+        const val REQUEST_DATE = "requestDate"
+        const val DISTRIBUTOR_ADDRESS = "distributorAddress"
+        const val IMAGE_INDEX = "imageIndex"
         private val TAG = "DistributorPageRequestActivity"
-            const val REQUEST_ID = "requestID"
-            const val REQUEST_ITEMS = "requestItems"
-            const val REQUEST_DATE = "requestDate"
-            const val DISTRIBUTOR_ADDRESS = "distributorAddress"
+
     }
 
 }

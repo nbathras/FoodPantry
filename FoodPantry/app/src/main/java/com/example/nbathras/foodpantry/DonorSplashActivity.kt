@@ -54,11 +54,11 @@ class DonorSplashActivity : AppCompatActivity() {
                 val intent = Intent(applicationContext, DistributorPageRequestActivity::class.java)
 
 
-                //This is a test
                 intent.putExtra(DISTRIBUTOR_NAME, distributor.distributorName)
                 intent.putExtra(DISTRIBUTOR_ABOUT, distributor.distributorAbout)
                 intent.putExtra(USER_ID, userUID)
                 intent.putExtra(DISTRIBUTOR_ID,distributor.distributorId)
+                intent.putExtra(IMAGE_INDEX, i)
                 intent.putStringArrayListExtra(DISTRIBUTOR_ADDRESS, distributor.distributorLocation)
 
                 startActivity(intent)
@@ -126,6 +126,7 @@ class DonorSplashActivity : AppCompatActivity() {
         const val DISTRIBUTOR_ABOUT = "distributorAbout"
         const val DISTRIBUTOR_ADDRESS = "distributorAddress"
         const val DISTRIBUTOR_ID = "distributorID"
+        const val IMAGE_INDEX = "imageIndex"
 
         private val TAG = "DonorSplashActivity"
     }

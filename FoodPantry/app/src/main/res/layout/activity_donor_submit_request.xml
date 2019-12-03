@@ -1,28 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".DonorSubmitRequestActivity">
 
-    <TextView
-        android:id="@+id/DonationLabelTextView"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="64dp"
-        android:text="Donations"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <ListView
         android:id="@+id/RequestListView"
         android:layout_width="match_parent"
         android:layout_height="600dp"
-        android:layout_alignTop="@id/DonationLabelTextView"
+        android:layout_alignTop="@id/fulfillmentDate"
         android:layout_alignParentStart="false"
         android:layout_alignParentTop="false"
         android:layout_centerInParent="true"
@@ -53,6 +40,53 @@
         android:layout_marginTop="2dp"
         android:layout_marginEnd="6dp"
         android:background="@android:drawable/ic_menu_my_calendar" />
+
+    <TextView
+        android:id="@+id/fulfillmentDateText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="3dp"
+        android:layout_marginTop="14dp"
+        android:text="Fulfillment Date:"
+        tools:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/fulfillmentDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/fulfillmentDateText"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="109dp"
+        android:layout_marginLeft="109dp"
+        android:layout_marginTop="14dp"
+        android:text="Date" />
+
+    <TextView
+        android:id="@+id/deliveryDateText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@id/fulfillmentDateText"
+        android:layout_alignTop="@id/fulfillmentDateText"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="3dp"
+        android:layout_marginTop="33dp"
+        android:text="Delivery Date:"
+        tools:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/deliveryDateChange"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/fulfillmentDate"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="109dp"
+        android:layout_marginTop="34dp"
+        android:text="Date" />
 
 
 </RelativeLayout>
