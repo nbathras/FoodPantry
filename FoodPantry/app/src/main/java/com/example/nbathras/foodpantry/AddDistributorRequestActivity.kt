@@ -11,57 +11,67 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.children
+import androidx.core.view.get
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 
 
 class AddDistributorRequestActivity : AppCompatActivity() {
-    private var parentLinearLayout: LinearLayout? = null
+    private lateinit var itemFormLayout: LinearLayout
 
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var mDistributorID: String
     private lateinit var mAddRequestButton : Button
+    private lateinit var mAddItemButton : Button
     private lateinit var mItemFinishDate : EditText
-    private lateinit var mItemName : EditText
-    private lateinit var mItemCurrentQuantity : EditText
-    private lateinit var mItemMaxQuantity : EditText
     private lateinit var databaseDistributorRequest: DatabaseReference
-    private lateinit var  itemsList : ArrayList<HashMap<String,Any>>
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_distributor_request);
 
+        //Initializes items list to store request names and quantities
+        sharedPreferences = getSharedPreferences(DistributorSplashActivity.MY_PREFERENCE, Context.MODE_PRIVATE)
+
         initializeUI()
+
         mAddRequestButton.setOnClickListener {
-
-
-
-
             // Create the Request Object
+            var itemsList =  ArrayList<HashMap<String,Any>>()
             var itemFinishDate = mItemFinishDate.text.toString()
 
             // adding request to database with items and new request id
             val requestId  = databaseDistributorRequest.push().key
 
             if (requestId != null) {
+                for (nextView: View in itemFormLayout.children) {
+                    var nextLinearLayout = nextView as LinearLayout
+                    var itemNameEditView = nextLinearLayout.get(0) as EditText
+                    var itemCurrentEditView = nextLinearLayout.get(1) as EditText
+                    var itemMaxEditTExt = nextLinearLayout.get(2) as EditText
 
-                val request = Request("",requestId,itemFinishDate,itemsList, mDistributorID)
+                    var entry = HashMap<String, Any>()
+                    entry.put(Request.ITEM_NAME, itemNameEditView.text.toString())
+                    entry.put(Request.ITEM_CURRENT_QUANTITY, itemCurrentEditView.text.toString())
+                    entry.put(Request.ITEM_MAX_QUANTITY, itemMaxEditTExt.text.toString())
+                    
+                    itemsList.add(entry)
+                }
+
+                val request = Request("", requestId, itemFinishDate, itemsList, mDistributorID)
                 // Binds user ID with request ID
                 databaseDistributorRequest.child(requestId).setValue(request)
-               // databaseDistributorRequest.child(requestId).setValue(request)
             }
 
             // Navigate back to DistributorSplashActivity
             val intent = Intent(this@AddDistributorRequestActivity, DistributorSplashActivity::class.java)
             startActivity(intent)
+            finish()
         }
 
-        //Initializes items list to store request names and quantities
-        itemsList =  ArrayList<HashMap<String,Any>>()
-        parentLinearLayout = findViewById(R.id.parent_linear_layout) as LinearLayout
-        sharedPreferences = getSharedPreferences(DistributorSplashActivity.MY_PREFERENCE, Context.MODE_PRIVATE)
+        mAddItemButton.setOnClickListener { createItemForm() }
 
         if(sharedPreferences != null) {
             //Gets distributor ID
@@ -74,54 +84,35 @@ class AddDistributorRequestActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        val inflater =
-            getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        val rowView: View = inflater.inflate(R.layout.request_item, null)
-
-        mItemName = rowView.findViewById(R.id.item_name)
-        mItemCurrentQuantity = rowView.findViewById(R.id.item_current)
-        mItemMaxQuantity = rowView.findViewById(R.id.item_max)
-        // Add the new row before the add field button.
-        parentLinearLayout!!.addView(rowView, parentLinearLayout!!.childCount - 2)
+        createItemForm()
     }
-    fun onAddField(v: View?) {
 
+    private fun createItemForm() {
         // create item class
-        val itemName =  mItemName.getText().toString()
-        val itemCurrnetQuantity =  mItemCurrentQuantity.getText().toString().toInt()
-        val itemMaxQuantity =  mItemMaxQuantity.getText().toString().toInt()
-
-        var item = HashMap<String,Any>()
-        item.put(Request.ITEM_NAME,itemName)
-        item.put(Request.ITEM_CURRENT_QUANTITY,itemCurrnetQuantity)
-        item.put(Request.ITEM_MAX_QUANTITY,itemMaxQuantity)
-
-        itemsList.add(item)
-
-
-        val inflater =
-            getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        val inflater = getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val rowView: View = inflater.inflate(R.layout.request_item, null)
 
-        // Bind Items Properties
-        mItemName = rowView.findViewById(R.id.item_name)
-        mItemCurrentQuantity = rowView.findViewById(R.id.item_current)
-        mItemMaxQuantity = rowView.findViewById(R.id.item_max)
         // Add the new row before the add field button.
-        parentLinearLayout!!.addView(rowView, parentLinearLayout!!.childCount - 1)
+        itemFormLayout!!.addView(rowView)
+
+//        Log.i("TEST", "Count: " + itemFormLayout.childCount)
+//        for (nextView: View in itemFormLayout.children) {
+//            var nextLinearLayout = nextView as LinearLayout
+//            var test = nextLinearLayout.get(0) as EditText
+//            Log.i("TEST", test.text.toString())
+//        }
     }
 
     fun onDelete(v: View) {
-        parentLinearLayout!!.removeView(v.parent as View)
+        itemFormLayout!!.removeView(v.parent as View)
     }
 
 
     private fun initializeUI() {
-
         mItemFinishDate = findViewById(R.id.item_finish_date)
         mAddRequestButton= findViewById(R.id.activityAddRequest_addRequestButton)
-
-
+        itemFormLayout = findViewById(R.id.item_form_layout)
+        mAddItemButton = findViewById(R.id.add_field_button)
     }
 
 }

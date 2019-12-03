@@ -6,7 +6,7 @@
 
     <EditText
         android:id="@+id/item_name"
-        android:layout_width="135dp"
+        android:layout_width="112dp"
         android:layout_height="match_parent"
         android:layout_weight="5"
         android:hint="Item name"
@@ -17,7 +17,7 @@
         android:layout_width="12dp"
         android:layout_height="match_parent"
         android:layout_weight="5"
-        android:hint="Current Quantity"
+        android:hint="Current #"
         android:inputType="number" />
 
     <EditText
@@ -25,11 +25,12 @@
         android:layout_width="10dp"
         android:layout_height="match_parent"
         android:layout_weight="5"
-        android:hint="Max Quantity"
+        android:hint="Desired #"
         android:inputType="number" />
+
     <Button
         android:id="@+id/delete_button"
-        android:layout_width="0dp"
+        android:layout_width="20dp"
         android:layout_height="40dp"
         android:layout_weight="1"
         android:background="@android:drawable/ic_delete"

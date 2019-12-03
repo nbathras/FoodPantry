@@ -1,18 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/parent_linear_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="5dp"
+    android:layout_margin="4dp"
     android:orientation="vertical"
-    tools:context=".AddDistributorRequestActivity">>
+    tools:context=".AddDistributorRequestActivity">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        <TextView
+            android:id="@+id/activityAddRequest_addInventory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="24dp"
+            android:textStyle="bold"
+            android:text="Create Request:"/>
+
+        <Button
+            android:id="@+id/add_field_button"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:background="#555"
+            android:layout_alignParentRight="true"
+            android:textColor="#FFFFFF"
+            android:text="Add Request" />
+    </RelativeLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="horizontal" >
+
         <EditText
             android:id="@+id/item_finish_date"
             android:layout_width="0dp"
@@ -20,55 +41,24 @@
             android:layout_weight="5"
             android:hint="Enter Finish Date"
             android:inputType="datetime"/>
+
     </LinearLayout>
-<!--    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="50dp"-->
-<!--        android:orientation="horizontal" >-->
-<!--        <EditText-->
-<!--            android:id="@+id/item_name"-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:layout_weight="5"-->
-<!--            android:hint="Item name"-->
-<!--            android:inputType="text"/>-->
 
-<!--        <EditText-->
-<!--            android:id="@+id/item_current"-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:layout_weight="5"-->
-<!--            android:hint="Current Quantity"-->
-<!--            android:inputType="number"/>-->
-
-<!--        <EditText-->
-<!--            android:id="@+id/item_max"-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:layout_weight="5"-->
-<!--            android:hint="Max Quantity"-->
-<!--            android:inputType="number"/>-->
-<!--        <Button-->
-<!--            android:id="@+id/delete_button"-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="40dp"-->
-<!--            android:layout_weight="1"-->
-<!--            android:background="@android:drawable/ic_delete"-->
-<!--            android:onClick="onDelete"/>-->
-<!--    </LinearLayout>-->
-    <Button
-        android:id="@+id/add_field_button"
-        android:layout_width="100dp"
+    <LinearLayout
+        android:id="@+id/item_form_layout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:background="#555"
-        android:layout_gravity="center"
-        android:onClick="onAddField"
-        android:textColor="#FFFFFF"
-        android:text="Add Request"
-        android:paddingLeft="5dp"/>
+        android:orientation="vertical">
+
+        <!-- Item Form Goes Here -->
+        <!--
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="test"/> -->
+
+    </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -79,11 +69,7 @@
             android:id="@+id/activityAddRequest_addRequestButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Add All Items"
-            android:textAppearance="@android:style/TextAppearance.Material.Medium"
-            android:textColor="@color/colorWhite"
-            />
-
+            android:text="Add All Items" />
 
     </LinearLayout>
 </LinearLayout>
