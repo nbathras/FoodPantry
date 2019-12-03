@@ -34,6 +34,8 @@
         android:layout_marginEnd="15dp"
         android:text="@string/distributor_about"
         tools:layout_marginStart="15dp"
+        android:maxLines="3"
+        android:ellipsize="end"
         tools:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
     <TextView
