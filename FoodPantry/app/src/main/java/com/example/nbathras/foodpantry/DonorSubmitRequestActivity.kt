@@ -107,8 +107,6 @@ class DonorSubmitRequestActivity : AppCompatActivity() {
                  donationToDistributorListView.adapter = donationToDistributorListAdapter
                 seekBarValueMap = donationToDistributorListAdapter.seekBarValues
 
-                SimpleDateFormat("dd-MM-yyyy").parse(deliveryDate)
-
                 submitButton.setOnClickListener {
                     //submit donation from seek bar values
                     if(deliveryDate != "00/00/0000") {
@@ -153,7 +151,7 @@ class DonorSubmitRequestActivity : AppCompatActivity() {
             }
         }
         //Create donation object
-        val donation = Donation(requestId, userID,finishDate, isDelivered, donationList)
+        val donation = Donation(requestId, userID,deliveryDate, isDelivered, donationList)
 
         databaseDonations.child(requestId).setValue(donation)
 
