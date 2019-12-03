@@ -8,8 +8,8 @@ import android.widget.ArrayAdapter
 import android.widget.TextView
 
 //Customized adapter for DistributorSplashActivity
-class RequestList(val context:Activity, var requests: List<Request>):
-    ArrayAdapter<Request>(context,R.layout.request_list_item, requests){
+class RequestList(val context:Activity, var requests: ArrayList<HashMap<String,Any>>):
+    ArrayAdapter<HashMap<String,Any>>(context,R.layout.request_list_item, requests) {
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         //inflating distributor_splash_list_item layout
@@ -23,25 +23,6 @@ class RequestList(val context:Activity, var requests: List<Request>):
         val request = requests[position]
         //Populating request text fields for each list element
         var itemDescription = "Item Description" + "\n"
-
-
-        // prepare item description string
-        for(item in request.itemsList) {
-            itemDescription +=  "Item Name: " + item[Request.ITEM_NAME] + "\n" + "Current Quantity:" + item[Request.ITEM_CURRENT_QUANTITY] +"\n" + "Max Quantity:" + item[Request.ITEM_MAX_QUANTITY] +"\n"
-        }
-        textViewRequestItemNameV.setText(itemDescription)
-       // requestIdAndUserIdV.text = "Request ID: " + request.requestId +  "\n"  +" User ID: " + request.userId
-       // requestFinishDate.text = "Finish Date: " +request.finishDate
-
-//        val inflater = context.layoutInflater
-//        val listViewItem = inflater.inflate(R.layout.activity_distributor_request_list, null, true)
-//
-//        val requestFinishDateText = listViewItem.findViewById<TextView>(R.id.requestMinQuantity)
-//
-//        val request = requests[position]
-//        requestFinishDateText.text = request.finishDate.toString()
-//        requestFinishDateText.textSize = 20.0f
-//        requestFinishDateText.gravity = Gravity.CENTER
 
         return listViewItem
     }

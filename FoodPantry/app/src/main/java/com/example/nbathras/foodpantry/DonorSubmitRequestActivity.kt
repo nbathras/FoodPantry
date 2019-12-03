@@ -29,6 +29,7 @@ class DonorSubmitRequestActivity : AppCompatActivity() {
     private lateinit var seekBarValueMap: HashMap<String, Int>
     private lateinit var databaseDonations: DatabaseReference
     private lateinit var databaseDistributorRequest: DatabaseReference
+    private lateinit var donorsDatabase: DatabaseReference
     private lateinit var databaseCorrespondingRequest: DatabaseReference
     private lateinit var userID: String
     private lateinit var finishDate:String
@@ -41,6 +42,7 @@ class DonorSubmitRequestActivity : AppCompatActivity() {
     private var currentRequest: Request = Request()
     private var cal : Calendar = Calendar.getInstance()
     private var deliveryDate: String = "00/00/0000"
+    private lateinit var donor: Donor
 
 
 
@@ -59,6 +61,7 @@ class DonorSubmitRequestActivity : AppCompatActivity() {
         databaseDonations = FirebaseDatabase.getInstance().getReference("donations").child(userID)
         databaseDistributorRequest = FirebaseDatabase.getInstance().getReference("requests").
             child(intent.getStringExtra(DistributorPageRequestActivity.DISTRIBUTOR_ID))
+        databaseDonations = FirebaseDatabase.getInstance().getReference("donors").child(userID)
 
         databaseCorrespondingRequest = databaseDistributorRequest.child(requestId)
 
@@ -137,6 +140,21 @@ class DonorSubmitRequestActivity : AppCompatActivity() {
                 //Empty
             }
         })
+
+
+
+        donorsDatabase.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                donor = Donor()
+                val newDonor = dataSnapshot.getValue<Donor>(Donor::class.java)
+                donor = newDonor!!
+            }
+            override fun onCancelled(p0: DatabaseError) {
+                //Empty
+            }
+
+        })
+
         }
 
     //This function will submit the donation values to the database
@@ -151,7 +169,7 @@ class DonorSubmitRequestActivity : AppCompatActivity() {
             }
         }
         //Create donation object
-        val donation = Donation(requestId, userID,deliveryDate, isDelivered, donationList)
+        val donation = Donation(requestId, userID,deliveryDate, isDelivered, donationList, donor.donorName)
 
         databaseDonations.child(requestId).setValue(donation)
 

@@ -8,21 +8,20 @@ import android.widget.ArrayAdapter
 import android.widget.TextView
 
 //Customized adapter for DistributorRequestsDonorActivity
-class DonorList(val context:Activity, var donors: List<Donor>):
-    ArrayAdapter<Donor>(context,R.layout.request_list_item, donors){
+class DonationList(val context:Activity, var donations: List<Donation>):
+    ArrayAdapter<Donation>(context,R.layout.request_list_item, donations){
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         //inflating donor_item layout
         val inflater = context.layoutInflater
         val listViewItem = inflater.inflate(R.layout.donor_item, null, true)
 
-        val textViewDonorNameV = listViewItem.findViewById<View>(R.id.donorRequestName) as TextView
+        val textViewDonorName = listViewItem.findViewById<View>(R.id.donorRequestName) as TextView
+        val donorDeliveryDate = listViewItem.findViewById<TextView>(R.id.donorRequestDate)
 
 
-        val donor = donors[position]
-        //Populating request text field with donor name
 
-        textViewDonorNameV.text = "Donor Name: " + donor.donorName +  "\n"
+
 
         return listViewItem
     }

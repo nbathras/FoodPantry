@@ -7,5 +7,6 @@ data class Donation (
     val userId: String = "",
     val deliveryDate: String    = "",
     val isDelivered: Boolean   = false,
-    val itemsList: ArrayList<Pair<String, Int>> = ArrayList<Pair<String, Int>>()
+    val itemsList: ArrayList<Pair<String, Int>> = ArrayList<Pair<String, Int>>(),
+    val userName: String = ""
 )
