@@ -115,7 +115,7 @@ class DonorSubmitRequestActivity : AppCompatActivity() {
                         Toast.makeText(
                             this@DonorSubmitRequestActivity,
                             "Please select a delivery date before submitting.",
-                            Toast.LENGTH_LONG)
+                            Toast.LENGTH_LONG).show()
                     }
 
                 }
