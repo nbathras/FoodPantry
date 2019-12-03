@@ -23,7 +23,7 @@
                 android:id="@+id/distributor_picture"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:background="@mipmap/ic_launcher_round"
+                android:background="@drawable/profilepicture1"
                 app:srcCompat="@color/common_google_signin_btn_text_dark_disabled" />
 
             <TextView

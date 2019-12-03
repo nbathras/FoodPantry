@@ -11,26 +11,25 @@
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="64dp"
-        android:layout_marginTop="0dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="64dp"
-        android:textStyle="bold"
+        android:text="Donations"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:gravity="center"
-        tools:textAppearance="@style/TextAppearance.AppCompat.Large" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ListView
         android:id="@+id/RequestListView"
         android:layout_width="match_parent"
-        android:layout_height="615dp"
+        android:layout_height="600dp"
         android:layout_alignTop="@id/DonationLabelTextView"
         android:layout_alignParentStart="false"
         android:layout_alignParentTop="false"
         android:layout_centerInParent="true"
         android:layout_marginStart="0dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="100dp"></ListView>
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="100dp" >
+    </ListView>
 
 
     <Button
@@ -44,6 +43,16 @@
         android:layout_marginEnd="75dp"
         android:layout_marginBottom="30dp"
         android:text="Submit" />
+
+    <Button
+        android:id="@+id/addDeliveryDateButton"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="6dp"
+        android:background="@android:drawable/ic_menu_my_calendar" />
 
 
 </RelativeLayout>

@@ -1,19 +1,23 @@
 package com.example.nbathras.foodpantry
 
+import android.app.DatePickerDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.Button
-import android.widget.ListView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import com.google.firebase.database.*
 import org.w3c.dom.Text
 import java.io.Serializable
-import java.util.ArrayList
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import java.util.*
+import kotlin.collections.HashMap
+import java.text.SimpleDateFormat
+import android.widget.Toast
+
+
+
 class DonorSubmitRequestActivity : AppCompatActivity() {
 
     private lateinit var distributorName: TextView
@@ -21,6 +25,7 @@ class DonorSubmitRequestActivity : AppCompatActivity() {
     private lateinit var requestItemsList: ArrayList<HashMap<String,Any>>
     private lateinit var donationToDistributorListAdapter: DonationToDistributorListItem
     private lateinit var submitButton: Button
+    private lateinit var addDeliveryDateButton: Button
     private lateinit var donationDateTitle: TextView
     private lateinit var seekBarValueMap: HashMap<String, Int>
     private lateinit var databaseDonations: DatabaseReference
@@ -33,6 +38,9 @@ class DonorSubmitRequestActivity : AppCompatActivity() {
     private  var donationList: ArrayList<Pair<String, Int>> = ArrayList<Pair<String, Int>>()
     private  var donationHashMap: HashMap<String, Int> = HashMap<String, Int>()
     private var currentRequest: Request = Request()
+    private var cal : Calendar = Calendar.getInstance()
+    private var deliveryDate: String = "00/00/0000"
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,11 +63,29 @@ class DonorSubmitRequestActivity : AppCompatActivity() {
         distributorName = findViewById(R.id.DonationLabelTextView)
         donationToDistributorListView = findViewById(R.id.RequestListView)
         submitButton = findViewById(R.id.SubmitButton)
+        addDeliveryDateButton = findViewById(R.id.addDeliveryDateButton)
         requestItemsList = intent.getSerializableExtra(DistributorPageRequestActivity.REQUEST_ITEMS)
                 as  ArrayList<HashMap<String,Any>>
 
         donationDateTitle = findViewById(R.id.DonationLabelTextView)
         donationDateTitle.text = intent.getStringExtra(DistributorPageRequestActivity.REQUEST_DATE)
+
+        val dateSetListener = object: DatePickerDialog.OnDateSetListener {
+            override fun onDateSet(p0: DatePicker?, year: Int, month: Int, day: Int) {
+                cal.set(Calendar.YEAR, year)
+                cal.set(Calendar.MONTH, month)
+                cal.set(Calendar.DAY_OF_MONTH, day)
+                val myFormat = "MM/dd/yyyy" // mention the format you need
+                val simpleDateFormat = SimpleDateFormat(myFormat, Locale.US)
+                deliveryDate = simpleDateFormat.format(cal.getTime())
+            }
+        }
+
+        addDeliveryDateButton.setOnClickListener {
+            DatePickerDialog(this@DonorSubmitRequestActivity, dateSetListener, cal.get(Calendar.YEAR),
+                cal.get(Calendar.MONTH),
+                cal.get(Calendar.DAY_OF_MONTH)).show()
+        }
 
     }
     override fun onStart() {
@@ -78,12 +104,19 @@ class DonorSubmitRequestActivity : AppCompatActivity() {
 
                 submitButton.setOnClickListener {
                     //submit donation from seek bar values
-                    submitDonation(seekBarValueMap)
-                    //update the request list
-                    updateRequestList()
+                    if(deliveryDate != "00/00/0000") {
+                        submitDonation(seekBarValueMap)
+                        //update the request list
+                        updateRequestList()
 
-                    var newIntent =  Intent(applicationContext, DonorSplashActivity::class.java)
-                    startActivity(newIntent)
+                        var newIntent =  Intent(applicationContext, DonorSplashActivity::class.java)
+                        startActivity(newIntent)
+                    } else {
+                        Toast.makeText(
+                            this@DonorSubmitRequestActivity,
+                            "Please select a delivery date before submitting.",
+                            Toast.LENGTH_LONG)
+                    }
 
                 }
             }
