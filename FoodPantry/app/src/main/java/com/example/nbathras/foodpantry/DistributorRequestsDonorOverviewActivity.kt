@@ -14,15 +14,16 @@ import kotlinx.android.synthetic.main.activity_donor_submit_request.*
 
 class DistributorRequestsDonorOverviewActivity : AppCompatActivity() {
 
-    private lateinit var currRequest: Request
     var donationDatabase: DatabaseReference? = null
-    private lateinit var listViewRequestAdapter: RequestList
-    private lateinit var listViewDonorAdapter: DistributorRequestList
-    private lateinit var listViewDonors: ListView
-    private lateinit var listViewRequests: ListView
-    private lateinit var listViewAdapter: ArrayAdapter<Donation>
     var requestsDatabase: DatabaseReference? = null
+    private lateinit var listViewRequestAdapter: RequestList
+    private lateinit var listViewDonations: ListView
+    private lateinit var listViewRequests: ListView
+    private lateinit var listViewDonationAdapter: ArrayAdapter<Donation>
     private lateinit var requestItemsList: java.util.ArrayList<HashMap<String, Any>>
+    private lateinit var donationList: MutableList<Donation>
+    private lateinit var requestID: String
+    private lateinit var currRequest: Request
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,9 +35,11 @@ class DistributorRequestsDonorOverviewActivity : AppCompatActivity() {
         requestItemsList = intent.getSerializableExtra(DistributorPageRequestActivity.REQUEST_ITEMS)
                 as java.util.ArrayList<HashMap<String, Any>>
 
+        requestID = intent.getStringExtra(REQUEST_ID)!!
+
         //List view defined in layout file
-        listViewDonors = findViewById<View>(R.id.donor_list) as ListView
-        listViewRequests = findViewById<View>(R.id.request_list) as ListView
+        listViewDonations = findViewById<View>(R.id.donation_list) as ListView
+        listViewRequests = findViewById<View>(R.id.item_list) as ListView
             }
 
     override fun onStart() {
@@ -62,6 +65,27 @@ class DistributorRequestsDonorOverviewActivity : AppCompatActivity() {
                 //Empty
             }
         })
+
+        donationDatabase!!.addValueEventListener(object: ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                donationList.clear()
+                for(postSnapshot in dataSnapshot.children){
+                    if(postSnapshot.hasChild(requestID)) {
+                        val donation = postSnapshot.child(requestID).getValue<Donation>(Donation::class.java)
+                        donationList.add(donation!!)
+                    }
+
+                }
+
+                listViewDonationAdapter = DonationList(this@DistributorRequestsDonorOverviewActivity,
+                    donationList)
+                listViewDonations.adapter = listViewDonationAdapter
+            }
+
+            override fun onCancelled(p0: DatabaseError) {
+                //Empty
+            }
+        })
     }
 
     companion object {
@@ -75,5 +99,6 @@ class DistributorRequestsDonorOverviewActivity : AppCompatActivity() {
         const val DISTRIBUTOR_ID = "distributorID"
         const val DONOR_NAME = "donorName"
         const val REQUEST_ITEMS = "requestItems"
+        const val REQUEST_ID = "requestId"
     }
 }

@@ -16,13 +16,15 @@ class RequestList(val context:Activity, var requests: ArrayList<HashMap<String,A
         val inflater = context.layoutInflater
         val listViewItem = inflater.inflate(R.layout.request_list_item, null, true)
 
-        val textViewRequestItemNameV = listViewItem.findViewById<View>(R.id.requestItemName) as TextView
-        val requestIdAndUserIdV = listViewItem.findViewById<View>(R.id.requestIdAndUserId) as TextView
-        val requestFinishDate = listViewItem.findViewById<View>(R.id.requestFinishDate) as TextView
+        val requestItemName = listViewItem.findViewById<TextView>(R.id.requestItemName)
+        val requestItemCurr = listViewItem.findViewById<TextView>(R.id.requestItemCurrent)
+        val requestItemDesired = listViewItem.findViewById<TextView>(R.id.requestItemDesired)
 
         val request = requests[position]
-        //Populating request text fields for each list element
-        var itemDescription = "Item Description" + "\n"
+
+        requestItemName.text = request.get(Request.ITEM_NAME).toString()
+        requestItemCurr.text = request.get(Request.ITEM_CURRENT_QUANTITY).toString()
+        requestItemDesired.text = request.get(Request.ITEM_MAX_QUANTITY).toString()
 
         return listViewItem
     }
