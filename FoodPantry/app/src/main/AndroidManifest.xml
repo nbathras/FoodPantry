@@ -20,7 +20,7 @@
         <activity android:name=".DonorSplashActivity" />
         <activity android:name=".AddRequestActivity" />
         <activity android:name=".DistributorRequestsDonorOverviewActivity" />
-        <activity android:name=".DonorList" />
+        <activity android:name=".DonationList" />
         <activity android:name=".AddDistributorRequestActivity" />
         <activity
             android:name=".DistributorRegistrationActivity"
