@@ -47,6 +47,8 @@ class DistributorSplashActivity : AppCompatActivity() {
 
         persistedRequests = ArrayList()
 
+        listViewInventory = findViewById(R.id.request_list)
+
         //When the user clicks on a specific distributor list item, show their biography/request page
         listViewInventory.onItemClickListener =
             AdapterView.OnItemClickListener { adapterView, view, i, l ->
