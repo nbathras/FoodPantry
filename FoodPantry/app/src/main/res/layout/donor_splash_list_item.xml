@@ -1,54 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".DistributorList">
 
-    <TextView
-        android:id="@+id/distributorName"
-        android:layout_width="370dp"
-        android:layout_height="37dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="15dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="15dp"
-        android:paddingBottom="10dp"
-        android:text="@string/distributor_name"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textStyle="bold" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginLeft="16dp"
+        android:layout_marginBottom="4dp">
 
-    <TextView
-        android:id="@+id/distributorAbout"
-        android:layout_width="372dp"
-        android:layout_height="50dp"
-        android:layout_below="@id/distributorName"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="15dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="15dp"
-        android:text="@string/distributor_about"
-        tools:layout_marginStart="15dp"
-        android:maxLines="3"
-        android:ellipsize="end"
-        tools:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+        <TextView
+            android:id="@+id/distributorName"
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:text="@string/distributor_name"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textStyle="bold"
+            android:maxLines="1"
+            android:ellipsize="end"/>
 
-    <TextView
-        android:id="@+id/distributorLocation"
-        android:layout_width="373dp"
-        android:layout_height="25dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="37dp"
-        android:layout_marginEnd="15dp"
-        android:text="Distributor Location"
-        tools:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+        <TextView
+            android:id="@+id/distributorLocation"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:text="Distributor Location"
+            tools:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:maxLines="1"
+            android:ellipsize="end"/>
 
-</RelativeLayout>
+        <TextView
+            android:id="@+id/distributorAbout"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@id/distributorName"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:text="@string/distributor_about"
+            android:maxLines="3"
+            android:ellipsize="end"
+            tools:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+    </LinearLayout>
+
+</LinearLayout>

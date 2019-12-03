@@ -108,7 +108,7 @@
         <ListView
             android:id="@+id/distributor_request_list"
             android:layout_width="match_parent"
-            android:layout_height="192dp"
+            android:layout_height="128dp"
             android:layout_below="@id/distributor_picture"
             android:fastScrollEnabled="true" />
 
