@@ -1,39 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="50dp"
+    android:orientation="horizontal"
     tools:context=".RequestList">
 
-    <TextView
-        android:id="@+id/requestItemName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="30dp"
-        android:paddingBottom="10dp"
-        android:text="@string/request_item"
-        android:textAppearance="@android:style/TextAppearance.Material.Medium" />
+    <RelativeLayout
+        android:layout_width="0dip"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:layout_weight=".7">
 
-    <TextView
-        android:id="@+id/requestIdAndUserId"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/requestItemName"
-        android:layout_marginLeft="15dp"
-        android:paddingBottom="10dp"
-        android:text="@string/request_item"
-        android:textAppearance="@android:style/TextAppearance.Material.Medium" />
+        <TextView
+            android:id="@+id/requestItemName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/request_item"
+            android:textAppearance="@android:style/TextAppearance.Material.Medium" />
 
-    <TextView
-        android:id="@+id/requestFinishDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/requestIdAndUserId"
-        android:layout_marginLeft="15dp"
-        android:text="@string/inventory_quantity" />
+    </RelativeLayout>
 
+    <RelativeLayout
+        android:layout_width="0dip"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:layout_weight=".3">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="horizontal">
 
-</RelativeLayout>
+            <TextView
+                android:id="@+id/requestItemCurrent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@android:style/TextAppearance.Material.Medium"
+                android:layout_marginRight="8dp"
+                android:text="0"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@android:style/TextAppearance.Material.Medium"
+                android:text="/"/>
+
+            <TextView
+                android:id="@+id/requestItemDesired"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@android:style/TextAppearance.Material.Medium"
+                android:layout_marginLeft="8dp"
+                android:text="100" />
+
+        </LinearLayout>
+    </RelativeLayout>
+</LinearLayout>

@@ -4,35 +4,58 @@
     android:layout_height="50dp"
     android:orientation="horizontal" >
 
-    <EditText
-        android:id="@+id/item_name"
-        android:layout_width="112dp"
+    <RelativeLayout
+        android:layout_width="0dip"
         android:layout_height="match_parent"
-        android:layout_weight="5"
-        android:hint="Item name"
-        android:inputType="text" />
+        android:layout_weight=".46">
 
-    <EditText
-        android:id="@+id/item_current"
-        android:layout_width="12dp"
+        <EditText
+            android:id="@+id/item_name"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="Item name"
+            android:inputType="text" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="0dip"
         android:layout_height="match_parent"
-        android:layout_weight="5"
-        android:hint="Current #"
-        android:inputType="number" />
+        android:layout_weight=".22">
 
-    <EditText
-        android:id="@+id/item_max"
-        android:layout_width="10dp"
+        <EditText
+            android:id="@+id/item_current"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="Current #"
+            android:inputType="number" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="0dip"
         android:layout_height="match_parent"
-        android:layout_weight="5"
-        android:hint="Desired #"
-        android:inputType="number" />
+        android:layout_weight=".22">
 
-    <Button
-        android:id="@+id/delete_button"
-        android:layout_width="20dp"
-        android:layout_height="40dp"
-        android:layout_weight="1"
-        android:background="@android:drawable/ic_delete"
-        android:onClick="onDelete"/>
+        <EditText
+            android:id="@+id/item_max"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="Desired #"
+            android:inputType="number" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="48dp"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/delete_button"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:drawable/ic_delete"
+            android:onClick="onDelete"/>
+
+    </RelativeLayout>
 </LinearLayout>
