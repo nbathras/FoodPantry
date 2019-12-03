@@ -67,7 +67,7 @@
         android:layout_gravity="center"
         android:onClick="onAddField"
         android:textColor="#FFFFFF"
-        android:text="Add Field"
+        android:text="Add Request"
         android:paddingLeft="5dp"/>
     <LinearLayout
         android:layout_width="match_parent"

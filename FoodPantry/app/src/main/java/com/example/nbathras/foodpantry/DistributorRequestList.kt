@@ -24,6 +24,17 @@ class DistributorRequestList(private val context:Activity, var requests: List<Re
         requestFinishDateText.gravity = Gravity.CENTER
 
         return listViewItem
+
+//        public View getView(...){
+//            View v;
+//            v.setOnClickListener(new OnClickListener() {
+//                void onClick() {
+//                    Intent intent= new Intent(context, ToActivity.class);
+//                    intent.putExtra("your_extra","your_class_value");
+//                    context.startActivity(intent);
+//                }
+//            });
+//        }
     }
 
 

@@ -26,11 +26,11 @@ class RequestList(val context:Activity, var requests: List<Request>):
 
         // prepare item description string
         for(item in request.itemsList) {
-            itemDescription +=  "Item Name: " + item[Request.ITEM_NAME] + "\n" + "Current Quantity:" + item[Request.ITEM_CURRENT_QUANTITY] +"\n" + "MAX Quantity:" + item[Request.ITEM_MAX_QUANTITY] +"\n"
+            itemDescription +=  "Item Name: " + item[Request.ITEM_NAME] + "\n" + "Current Quantity:" + item[Request.ITEM_CURRENT_QUANTITY] +"\n" + "Max Quantity:" + item[Request.ITEM_MAX_QUANTITY] +"\n"
         }
         textViewRequestItemNameV.setText(itemDescription)
-        requestIdAndUserIdV.text = "Request Id: " + request.requestId +  "\n"  +" UserId: " + request.userId
-        requestFinishDate.text = "Finish Date: " +request.finishDate
+       // requestIdAndUserIdV.text = "Request ID: " + request.requestId +  "\n"  +" User ID: " + request.userId
+       // requestFinishDate.text = "Finish Date: " +request.finishDate
 
         return listViewItem
     }

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+tools:context=".DonorList">
+
+<TextView
+    android:id="@+id/donorRequestName"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="15dp"
+    android:layout_marginTop="30dp"
+    android:paddingBottom="10dp"
+    android:text="Donor Name"
+    android:textAppearance="@android:style/TextAppearance.Material.Medium" />
+
+<TextView
+    android:id="@+id/donorRequestDate"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/donorRequestName"
+    android:layout_marginLeft="15dp"
+    android:paddingBottom="10dp"
+    android:text="Delivery Date"
+    android:textAppearance="@android:style/TextAppearance.Material.Medium" />
+
+
+
+</RelativeLayout>

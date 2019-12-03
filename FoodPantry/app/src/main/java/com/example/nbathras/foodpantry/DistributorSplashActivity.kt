@@ -36,7 +36,6 @@ class DistributorSplashActivity : AppCompatActivity() {
 
         distributorsDatabase = FirebaseDatabase.getInstance().getReference("distributors")
 
-
         sharedPreferences = getSharedPreferences(DistributorSplashActivity.MY_PREFERENCE, Context.MODE_PRIVATE)
         if(sharedPreferences != null) {
             mDistributorID = sharedPreferences.getString(LoginActivity.USER_DISTRIBUTOR_ID,"").toString()
@@ -49,7 +48,7 @@ class DistributorSplashActivity : AppCompatActivity() {
         persistedRequests = ArrayList()
 
         //List view defined in layout file
-        listViewInventory = findViewById<View>(R.id.request_list) as ListView
+//        listViewInventory = findViewById<View>(R.id.request_list) as ListView
 
         //When the user clicks on a specific distributor list item, show their biography/request page
         listViewInventory.onItemClickListener =
@@ -70,6 +69,7 @@ class DistributorSplashActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
 
+        //DISTRIBUTORS DATABASE
         distributorsDatabase!!.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 //clearing the previous distributors list
@@ -89,19 +89,17 @@ class DistributorSplashActivity : AppCompatActivity() {
 
                         }
                     }
-
-
                 }
 
 
                 //Initializing listViewAdapter to customized DistributorRequestList adapter
-                listViewAdapter = RequestList(this@DistributorSplashActivity, persistedRequests)
+                listViewAdapter = DistributorRequestList(this@DistributorSplashActivity, persistedRequests)
                 listViewInventory.adapter = listViewAdapter
 
                 if(mDistributor != null) {
-                    mDistributorName.text = mDistributor.distributorName
-                    mDistributorAbout.text = mDistributor.distributorAbout
-                    mDistributorAdditionalAddress.text = mDistributor.distributorLocation.toString()
+                    mDistributorName.text = "Name: " + mDistributor.distributorName
+                    mDistributorAbout.text = "About: " + mDistributor.distributorAbout
+                    mDistributorAdditionalAddress.text = "Address: " + mDistributor.distributorLocation.toString()
                 }
             }
 
@@ -109,6 +107,8 @@ class DistributorSplashActivity : AppCompatActivity() {
                 //Empty
             }
         })
+
+        //REQUESTS DATABASE
         requestsDatabase!!.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 //clearing the previous distributors list
