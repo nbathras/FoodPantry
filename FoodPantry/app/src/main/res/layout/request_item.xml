@@ -6,13 +6,13 @@
 
     <RelativeLayout
         android:layout_width="0dip"
-        android:layout_height="match_parent"
+        android:layout_height="50dp"
         android:layout_weight=".46">
 
         <EditText
             android:id="@+id/item_name"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="50dp"
             android:hint="Item name"
             android:inputType="text" />
 
@@ -26,7 +26,7 @@
         <EditText
             android:id="@+id/item_current"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="50dp"
             android:hint="Current #"
             android:inputType="number" />
 
@@ -34,7 +34,7 @@
 
     <RelativeLayout
         android:layout_width="0dip"
-        android:layout_height="match_parent"
+        android:layout_height="50dp"
         android:layout_weight=".22">
 
         <EditText
@@ -48,12 +48,12 @@
 
     <RelativeLayout
         android:layout_width="48dp"
-        android:layout_height="match_parent">
+        android:layout_height="50dp">
 
         <Button
             android:id="@+id/delete_button"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="50dp"
             android:background="@android:drawable/ic_delete"
             android:onClick="onDelete"/>
 

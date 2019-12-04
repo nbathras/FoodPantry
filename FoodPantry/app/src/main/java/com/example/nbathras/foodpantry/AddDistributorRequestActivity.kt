@@ -10,6 +10,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.LinearLayout
+import android.widget.RelativeLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.children
 import androidx.core.view.get
@@ -48,9 +49,9 @@ class AddDistributorRequestActivity : AppCompatActivity() {
             if (requestId != null) {
                 for (nextView: View in itemFormLayout.children) {
                     var nextLinearLayout = nextView as LinearLayout
-                    var itemNameEditView = nextLinearLayout.get(0) as EditText
-                    var itemCurrentEditView = nextLinearLayout.get(1) as EditText
-                    var itemMaxEditTExt = nextLinearLayout.get(2) as EditText
+                    var itemNameEditView = (nextLinearLayout.get(0) as RelativeLayout).get(0) as EditText
+                    var itemCurrentEditView = (nextLinearLayout.get(1) as RelativeLayout).get(0) as EditText
+                    var itemMaxEditTExt = (nextLinearLayout.get(2) as RelativeLayout).get(0) as EditText
 
                     var entry = HashMap<String, Any>()
                     entry.put(Request.ITEM_NAME, itemNameEditView.text.toString())
