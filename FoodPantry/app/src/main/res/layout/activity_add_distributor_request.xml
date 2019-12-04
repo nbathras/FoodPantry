@@ -26,7 +26,7 @@
             android:background="#555"
             android:layout_alignParentRight="true"
             android:textColor="#FFFFFF"
-            android:text="Add Request" />
+            android:text="Add Item" />
     </RelativeLayout>
 
     <LinearLayout
@@ -69,7 +69,7 @@
             android:id="@+id/activityAddRequest_addRequestButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Add All Items" />
+            android:text="Submit Request" />
 
     </LinearLayout>
 </LinearLayout>

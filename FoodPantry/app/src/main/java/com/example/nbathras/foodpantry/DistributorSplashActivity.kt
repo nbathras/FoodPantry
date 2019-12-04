@@ -85,8 +85,8 @@ class DistributorSplashActivity : AppCompatActivity() {
                             val distributor = postSnapshot2.getValue<Distributor>(Distributor::class.java)
 
                             if (distributor != null) {
-                                mDistributorName.text = "Name: " + distributor.distributorName
-                                mDistributorAbout.text = "About: " + distributor.distributorAbout
+                                mDistributorName.text = distributor.distributorName
+                                mDistributorAbout.text = distributor.distributorAbout
                                 var distributorAddressArraylist = distributor.distributorLocation
 
                                 var count = 1
