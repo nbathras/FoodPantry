@@ -59,8 +59,8 @@ class DonorSubmitRequestActivity : AppCompatActivity() {
         requestDate = intent.getStringExtra(DistributorPageRequestActivity.REQUEST_DATE)
 
         databaseDonations = FirebaseDatabase.getInstance().getReference("donations").child(userID)
-        databaseDistributorRequest = FirebaseDatabase.getInstance().getReference("requests").
-            child(intent.getStringExtra(DistributorPageRequestActivity.DISTRIBUTOR_ID))
+        databaseDistributorRequest = FirebaseDatabase.getInstance().getReference("requests").child(distributorId)
+
         donorsDatabase = FirebaseDatabase.getInstance().getReference("donors").child(userID)
 
         databaseCorrespondingRequest = databaseDistributorRequest.child(requestId)
@@ -72,7 +72,6 @@ class DonorSubmitRequestActivity : AppCompatActivity() {
         deliveryDateChanged = findViewById(R.id.deliveryDateChange)
         requestItemsList = intent.getSerializableExtra(DistributorPageRequestActivity.REQUEST_ITEMS)
                 as  ArrayList<HashMap<String,Any>>
-
 
         fulfillmentDateText.text = requestDate
 
@@ -162,9 +161,14 @@ class DonorSubmitRequestActivity : AppCompatActivity() {
             override fun onCancelled(p0: DatabaseError) {
                 //Empty
             }
+<<<<<<< HEAD
+          })
+        }
+=======
 
         })
     }
+>>>>>>> 1fa12671147cb42b442190d4c2384f75bd649c1b
 
     //This function will submit the donation values to the database
     fun submitDonation(seekBarMap:HashMap<String, Int>) {
