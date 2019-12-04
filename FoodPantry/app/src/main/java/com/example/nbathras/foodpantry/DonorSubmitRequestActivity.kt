@@ -59,8 +59,8 @@ class DonorSubmitRequestActivity : AppCompatActivity() {
         requestDate = intent.getStringExtra(DistributorPageRequestActivity.REQUEST_DATE)
 
         databaseDonations = FirebaseDatabase.getInstance().getReference("donations").child(userID)
-        databaseDistributorRequest = FirebaseDatabase.getInstance().getReference("requests").
-            child(distributorId)
+        databaseDistributorRequest = FirebaseDatabase.getInstance().getReference("requests").child(distributorId)
+
         donorsDatabase = FirebaseDatabase.getInstance().getReference("donors").child(userID)
 
         databaseCorrespondingRequest = databaseDistributorRequest.child(requestId)
@@ -140,19 +140,35 @@ class DonorSubmitRequestActivity : AppCompatActivity() {
             }
         })
 
-
-
         donorsDatabase.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                donor = Donor()
-                val newDonor = dataSnapshot.getValue<Donor>(Donor::class.java)
-                donor = newDonor!!
+                for (postSnapshot in dataSnapshot.children) {
+                    val userId = postSnapshot.child("userId").getValue() as String
+                    val donorId = postSnapshot.child("donorId").getValue() as String
+                    val donorType = postSnapshot.child("donorType").getValue() as String
+                    val donorName = postSnapshot.child("donorName").getValue() as String
+                    val donorPhone = postSnapshot.child("donorPhone").getValue() as String
+
+                    donor = Donor(
+                        userId,
+                        donorId,
+                        donorType,
+                        donorName,
+                        donorPhone
+                    )
+                }
             }
             override fun onCancelled(p0: DatabaseError) {
                 //Empty
             }
+<<<<<<< HEAD
           })
         }
+=======
+
+        })
+    }
+>>>>>>> 1fa12671147cb42b442190d4c2384f75bd649c1b
 
     //This function will submit the donation values to the database
     fun submitDonation(seekBarMap:HashMap<String, Int>) {

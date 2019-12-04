@@ -21,7 +21,7 @@ class DistributorRequestsDonorOverviewActivity : AppCompatActivity() {
     private lateinit var listViewRequests: ListView
     private lateinit var listViewDonationAdapter: ArrayAdapter<Donation>
     private lateinit var requestItemsList: java.util.ArrayList<HashMap<String, Any>>
-    private lateinit var donationList: MutableList<Donation>
+    private lateinit var donationList: ArrayList<Donation>
     private lateinit var requestID: String
     private lateinit var currRequest: Request
 
@@ -31,6 +31,9 @@ class DistributorRequestsDonorOverviewActivity : AppCompatActivity() {
         //getting the reference of artists node
 
         donationDatabase = FirebaseDatabase.getInstance().getReference("donations")
+        requestsDatabase = FirebaseDatabase.getInstance().getReference("requests")
+
+        donationList = ArrayList<Donation>()
 
         requestItemsList = intent.getSerializableExtra(DistributorPageRequestActivity.REQUEST_ITEMS)
                 as java.util.ArrayList<HashMap<String, Any>>
@@ -40,7 +43,7 @@ class DistributorRequestsDonorOverviewActivity : AppCompatActivity() {
         //List view defined in layout file
         listViewDonations = findViewById<View>(R.id.donation_list) as ListView
         listViewRequests = findViewById<View>(R.id.item_list) as ListView
-            }
+    }
 
     override fun onStart() {
         super.onStart()
@@ -71,8 +74,27 @@ class DistributorRequestsDonorOverviewActivity : AppCompatActivity() {
                 donationList.clear()
                 for(postSnapshot in dataSnapshot.children){
                     if(postSnapshot.hasChild(requestID)) {
-                        val donation = postSnapshot.getValue<Donation>(Donation::class.java)
-                        donationList.add(donation!!)
+                        for (postSnapshot2 in postSnapshot.children) {
+                            // val donation = postSnapshot2.getValue<Donation>(Donation::class.java)
+
+                            val randomId = postSnapshot2.child("randomId").getValue() as String
+                            val userId = postSnapshot2.child("userId").getValue() as String
+                            val deliveryDate = postSnapshot2.child("deliveryDate").getValue() as String
+                            val isDelivered = postSnapshot2.child("delivered").getValue() as Boolean
+                            val itemList = postSnapshot2.child("itemsList").getValue() as java.util.ArrayList<Pair<String, Int>>
+                            val userName = postSnapshot2.child("userName").getValue() as String
+
+                            val donation = Donation(
+                                randomId,
+                                userId,
+                                deliveryDate,
+                                isDelivered,
+                                itemList,
+                                userName
+                            )
+
+                            donationList.add(donation!!)
+                        }
                     }
 
                 }
