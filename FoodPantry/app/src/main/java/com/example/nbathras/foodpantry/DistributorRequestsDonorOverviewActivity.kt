@@ -51,13 +51,6 @@ class DistributorRequestsDonorOverviewActivity : AppCompatActivity() {
         //REQUESTS DATABASE
         requestsDatabase!!.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                //clearing the previous distributors list
-                currRequest = Request()
-
-                //populating the distributors array from the database
-                    val persistedRequest = dataSnapshot.getValue<Request>(Request::class.java)
-                    currRequest = persistedRequest!!
-
                 //Initializing listViewAdapter to customized DistributorList adapter
                 listViewRequestAdapter = RequestList(
                     this@DistributorRequestsDonorOverviewActivity, requestItemsList)
@@ -73,15 +66,17 @@ class DistributorRequestsDonorOverviewActivity : AppCompatActivity() {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 donationList.clear()
                 for(postSnapshot in dataSnapshot.children){
-                    if(postSnapshot.hasChild(requestID)) {
-                        for (postSnapshot2 in postSnapshot.children) {
+                    for (postSnapshot2 in postSnapshot.children) {
+                        if(postSnapshot2.key == requestID) {
                             // val donation = postSnapshot2.getValue<Donation>(Donation::class.java)
 
                             val randomId = postSnapshot2.child("randomId").getValue() as String
                             val userId = postSnapshot2.child("userId").getValue() as String
-                            val deliveryDate = postSnapshot2.child("deliveryDate").getValue() as String
+                            val deliveryDate =
+                                postSnapshot2.child("deliveryDate").getValue() as String
                             val isDelivered = postSnapshot2.child("delivered").getValue() as Boolean
-                            val itemList = postSnapshot2.child("itemsList").getValue() as java.util.ArrayList<Pair<String, Int>>
+                            val itemList =
+                                postSnapshot2.child("itemsList").getValue() as java.util.ArrayList<Pair<String, Int>>
                             val userName = postSnapshot2.child("userName").getValue() as String
 
                             val donation = Donation(
@@ -96,7 +91,6 @@ class DistributorRequestsDonorOverviewActivity : AppCompatActivity() {
                             donationList.add(donation!!)
                         }
                     }
-
                 }
 
                 listViewDonationAdapter = DonationList(this@DistributorRequestsDonorOverviewActivity,

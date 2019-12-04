@@ -37,7 +37,7 @@
             <ListView
                 android:id="@+id/item_list"
                 android:layout_width="match_parent"
-                android:layout_height="128dp"
+                android:layout_height="match_parent"
                 android:fastScrollEnabled="true" />
 
         </LinearLayout>
@@ -56,7 +56,7 @@
             <ListView
                 android:id="@+id/donation_list"
                 android:layout_width="match_parent"
-                android:layout_height="128dp"
+                android:layout_height="match_parent"
                 android:fastScrollEnabled="true" />
         </LinearLayout>
     </LinearLayout>
