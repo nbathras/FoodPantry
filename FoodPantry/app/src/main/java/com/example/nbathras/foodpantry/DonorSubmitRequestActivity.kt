@@ -161,14 +161,8 @@ class DonorSubmitRequestActivity : AppCompatActivity() {
             override fun onCancelled(p0: DatabaseError) {
                 //Empty
             }
-<<<<<<< HEAD
-          })
-        }
-=======
-
         })
     }
->>>>>>> 1fa12671147cb42b442190d4c2384f75bd649c1b
 
     //This function will submit the donation values to the database
     fun submitDonation(seekBarMap:HashMap<String, Int>) {
