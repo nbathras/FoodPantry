@@ -105,7 +105,7 @@ class AddDistributorRequestActivity : AppCompatActivity() {
     }
 
     fun onDelete(v: View) {
-        itemFormLayout!!.removeView(v.parent as View)
+        itemFormLayout!!.removeView(v.parent.parent as View)
     }
 
 

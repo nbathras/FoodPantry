@@ -103,8 +103,15 @@ class DistributorPageRequestActivity : AppCompatActivity() {
 
         //Setting Distributor Profile Picture
         val imageIndex = intent.getIntExtra(IMAGE_INDEX, 0)
-        val imageArray = arrayOf(R.drawable.profilepicture1, R.drawable.profilepic2, R.drawable.profilepic3)
-        distributorPicture.setImageResource(imageArray[imageIndex])
+        val imageArray = arrayOf(
+            R.drawable.profilepic5,
+            R.drawable.profilepic6,
+            R.drawable.profilepic4,
+            R.drawable.profilepicture1,
+            R.drawable.profilepic3,
+            R.drawable.profilepic2
+        )
+        distributorPicture.setImageResource(imageArray[imageIndex % 6])
 
 
         listViewDistributorRequest.onItemClickListener =
