@@ -71,7 +71,7 @@ class DistributorRequestsDonorOverviewActivity : AppCompatActivity() {
                 donationList.clear()
                 for(postSnapshot in dataSnapshot.children){
                     if(postSnapshot.hasChild(requestID)) {
-                        val donation = postSnapshot.child(requestID).getValue<Donation>(Donation::class.java)
+                        val donation = postSnapshot.getValue<Donation>(Donation::class.java)
                         donationList.add(donation!!)
                     }
 

@@ -100,8 +100,6 @@ class DistributorPageRequestActivity : AppCompatActivity() {
 
         val distributorID = intent.getStringExtra(DISTRIBUTOR_ID)
         val userID = intent.getStringExtra(USER_ID)
-        val distributorName = intent.getStringExtra(DISTRIBUTOR_NAME)
-
 
         //Setting Distributor Profile Picture
         val imageIndex = intent.getIntExtra(IMAGE_INDEX, 0)
